@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 
+// schema of user the fields and types
 const userSchema = mongoose.Schema({
     name:{
         type:String,
@@ -28,10 +29,12 @@ const userSchema = mongoose.Schema({
     timestamps:true
 })
 
+// used for authetication while login to match the password
 userSchema.methods.matchPassword = async function(enteredPassword) {
     return await bcrypt.compare(enteredPassword,this.password)
 }
 
+// always before any save of the user ( update or register ) hash the password
 userSchema.pre('save', async function(next) {
     if(!this.isModified){
         next()

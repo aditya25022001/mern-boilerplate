@@ -1,6 +1,8 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import path from 'path'
+import { notFound, errorHandler } from './middlewares/errorMiddleware'
+import authRoutes from './routes/authRoutes.js'
 
 // initialise express application
 const app = express()
@@ -20,6 +22,9 @@ const __dirname = path.resolve()
 // to communicate in JSON format
 app.use(express.json())
 
+// use the routes defined in authRoutes for the pattern /api/auth
+app.use('/api/auth',authRoutes)
+
 if(NODE_ENV==='production'){
 
     // to specify the API detail of our application in production mode ( optional )
@@ -35,6 +40,12 @@ else{
     // to specify the API detail of our application in development mode ( optional )
     app.get('/',(req,res) => res.sendFile(path.resolve(__dirname, 'backend', 'templates', 'index.html')))
 }
+
+// use this middleware when any api endpoint is not found
+app.use(notFound)
+
+// use this middleware when any error is encountered
+app.use(errorHandler)
 
 // listen the server on the given port
 app.listen(PORT,`Server running on ${PORT} in ${NODE_ENV} environment`)
