@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css' integrity='sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l' crossorigin='anonymous'/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MERN Boilerplate APIs Screen</title>
+    </head>
+    <body class='p-4'>
+        <h3 class='border-bottom pb-2'>MERN Boilerplate Server</h3>  
+        <p>
+            The following are the endpoints of the api 
+        </p>
+        <table id="table" class='table border table-hover'>
+            <thead class='thead-dark'>
+                <tr>
+                    <th>Method</th>
+                    <th>Route</th>
+                    <th>Parameters</th>
+                    <th>Access</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class='table-warning'>
+                    <td>POST</td>
+                    <td>/api/auth/register</td>
+                    <td>body : JSON{name, email, password}</td>
+                    <td>Public</td>
+                    <td>A route for user to register</td>
+                </tr>
+                <tr class='table-warning'>
+                    <td>POST</td>
+                    <td>/api/auth/login</td>
+                    <td>body : JSON{email, password}</td>
+                    <td>Public</td>
+                    <td>A route for user to login</td>
+                </tr>
+                <tr class='table-success'>
+                    <td>GET</td>
+                    <td>/api/profile/getprofile</td>
+                    <td>headers : Authorization : Bearer token</td>
+                    <td>Private</td>
+                    <td>A route for user to get user profile</td>
+                </tr>
+                <tr class='table-primary'>
+                    <td>PUT</td>
+                    <td>/api/profile/updateprofile</td>
+                    <td class='pb-0'>
+                        <ul>
+                            <li>headers : Authorization : Bearer token</li>
+                            <li>body : JSON{id, name, email}</li>
+                        </ul>
+                    </td>
+                    <td>Private</td>
+                    <td>A route for user to update user profile</td>
+                </tr>
+                <tr class='table-warning'>
+                    <td>POST</td>
+                    <td>/api/auth/sendOTP</td>
+                    <td>body : JSON{email}</td>
+                    <td>Public</td>
+                    <td>A route for user to request for otp to recover password</td>
+                </tr>
+                <tr class='table-primary'>
+                    <td>PUT</td>
+                    <td>/api/auth/reset/:id</td>
+                    <td>body : JSON{password, id}</td>
+                    <td>Public</td>
+                    <td>A route for user to reset password</td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            const windowWidth = window.innerWidth
+            if(windowWidth<=684){
+                document.getElementById("table").classList.add("table-responsive")
+            }
+            else{
+                document.getElementById("table").classList.remove("table-responsive")
+            }
+        </script>
+    </body>
+</html>

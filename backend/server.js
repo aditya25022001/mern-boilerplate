@@ -1,20 +1,25 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import path from 'path'
-import { notFound, errorHandler } from './middlewares/errorMiddleware'
+import { notFound, errorHandler } from './middlewares/errorMiddleware.js'
+import { connectDB } from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
+import profileRoutes from './routes/profileRoutes.js'
+
+// connect to the database
+connectDB()
 
 // initialise express application
 const app = express()
+
+// to use the environment variables in .env file
+dotenv.config()
 
 // set port on which the server will listen
 const PORT = process.env.PORT || 5000
 
 // set the node environment
 const NODE_ENV = process.env.NODE_ENV || 'development'
-
-// to use the environment variables in .env file
-dotenv.config()
 
 // to use __dirname in module format of node
 const __dirname = path.resolve()
@@ -24,6 +29,9 @@ app.use(express.json())
 
 // use the routes defined in authRoutes for the pattern /api/auth
 app.use('/api/auth',authRoutes)
+
+// use the routes defined in profileRoutes for the pattern /api/profile
+app.use('/api/profile',profileRoutes)
 
 if(NODE_ENV==='production'){
 
@@ -48,4 +56,4 @@ app.use(notFound)
 app.use(errorHandler)
 
 // listen the server on the given port
-app.listen(PORT,`Server running on ${PORT} in ${NODE_ENV} environment`)
+app.listen(PORT,console.log(`Server running on ${PORT} in ${NODE_ENV} environment`))
