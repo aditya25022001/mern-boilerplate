@@ -3,11 +3,8 @@ import asyncHandler from 'express-async-handler'
 import { welcomeEmail, sendLoginWarningEmail, sendOtpEmail } from './emailController.js'
 import { generateToken } from '../utils/generateToken.js'
 import { generateHash } from '../utils/generateHash.js'
-import { v4 } from 'uuid'
+import { ulid } from 'ulid'
 
-// route        POST/api/auth/register
-// access       public
-// descripton   User registration
 export const register = asyncHandler(async (req,res) => {
     const { name, email, password } = req.body
     const userExists = await User.findOne({ email })
@@ -38,38 +35,39 @@ export const register = asyncHandler(async (req,res) => {
     }
 })
 
-// route        POST/api/auth/login
-// access       public
-// descripton   User login
 export const login = asyncHandler(async (req,res) => {
     const { email, password } = req.body
     const userExists = await User.findOne({ email })
-    if(userExists && (await userExists.matchPassword(password))) {
-        res.status(200).json({
-            _id: userExists._id,
-            name:userExists.name,
-            email:userExists.email,
-            isAdmin:userExists.isAdmin,
-            profilePic:userExists.profilePic,
-            token: generateToken(userExists._id),
-        })
+    if(userExists){
+        if(await userExists.matchPassword(password)) {
+            res.status(200).json({
+                _id: userExists._id,
+                name:userExists.name,
+                email:userExists.email,
+                isAdmin:userExists.isAdmin,
+                profilePic:userExists.profilePic,
+                token: generateToken(userExists._id),
+            })
+        }
+        else{
+            sendLoginWarningEmail(userExists.name, email)
+            res.status(401).json({
+                message:"Bad credentials"
+            })
+        }
     }
     else{
-        sendLoginWarningEmail(userExists.name, email)
-        res.status(401).json({
-            message:"Bad credentials"
+        res.status(404).json({
+            message:"User not found"
         })
     }
 })
 
-// route        POST/api/auth/sendOTP
-// access       public
-// descripton   Sending OTP to users to recover password
 export const sendOtp = asyncHandler(async (req,res) => {
     const { email } = req.body
     const user = await User.findOne({ email })
     if(user){
-        const otp = v4().slice(0,8)
+        const otp = ulid().slice(10,16)
         sendOtpEmail(user.name, email, otp)
         res.status(200).json({
             _id: user._id,
@@ -82,9 +80,6 @@ export const sendOtp = asyncHandler(async (req,res) => {
     }
 })
 
-// route        PUT/api/auth/reset/:id
-// access       public
-// descripton   Reseting password of the user
 export const resetPassword = asyncHandler(async (req,res) => {
     const { password, id } = req.body
     const user = await User.findById(id)

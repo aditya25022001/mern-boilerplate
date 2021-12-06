@@ -4,7 +4,7 @@ import { authenticate } from '../middlewares/authMiddleware.js'
 
 const router = express.Router()
 
-router.route('/get/:id').get(authenticate, userProfile)
+router.route('/').get(authenticate, userProfile)
 
 router.route('/update').put(authenticate, userUpdateProfile)
 

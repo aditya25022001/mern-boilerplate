@@ -8,6 +8,8 @@ import Button from '@mui/material/Button';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import LockIcon from '@mui/icons-material/Lock';
+import { Loader } from '../components/Loader'
+import { Message } from '../components/Message'
 
 export const LoginScreen = () => {
 
@@ -20,7 +22,7 @@ export const LoginScreen = () => {
     const dispatch = useDispatch()
 
     const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
+    const { loading, error, userInfo } = userLogin
 
     const loginHandler = (e) => {
         e.preventDefault()
@@ -34,7 +36,11 @@ export const LoginScreen = () => {
     },[userInfo, navigate])
     
     return (
-        <Form onSubmit={loginHandler} className='formcomponent mx-auto'>
+        <>
+        {error && <Message variant='error' message={error} />}
+        {loading 
+        ? <Loader/> 
+        : <Form onSubmit={loginHandler} className='formcomponent mx-auto'>
             <ListGroup className='card p-3'>
                 <ListGroup.Item className='border-0'>
                     <h4 className='d-flex' style={{ alignItems:'center' }}>
@@ -78,6 +84,7 @@ export const LoginScreen = () => {
                     </div>
                 </ListGroup.Item>
             </ListGroup>
-        </Form>
+        </Form>}
+        </>
     )
 }

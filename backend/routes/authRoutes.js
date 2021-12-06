@@ -9,6 +9,6 @@ router.route('/login').post(login)
 
 router.route('/sendOTP').post(sendOtp)
 
-router.route('/reset/:id').put(resetPassword)
+router.route('/reset').put(resetPassword)
 
 export default router

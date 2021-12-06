@@ -1,6 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, ListGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { userRegisterAction } from '../actions/authActions'
+import { useNavigate } from 'react-router'
+import { useSelector, useDispatch } from 'react-redux'
+import { Loader } from '../components/Loader'
+import { Message } from '../components/Message'
 import Button from '@mui/material/Button';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -14,9 +19,46 @@ export const RegisterScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
     const [showP, setShowP] = useState(false)
     const [showCP, setShowCP] = useState(false)
+    const [userError, setUserError] = useState(false)
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
+    const userRegister = useSelector(state => state.userRegister)
+    const { loading, error } = userRegister
+
+    const dispatch = useDispatch()
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(userInfo){
+            navigate('/')
+        }
+    },[userInfo, navigate])
+
+    const registerHandler = (e) => {
+        e.preventDefault()
+        if(password===confirmPassword){
+            dispatch(userRegisterAction(name, email, password))
+        }
+        else{
+            setUserError(true)
+        }
+    }
+
+    if(userError){
+        setTimeout(() => {
+            setUserError(false)
+        },2500)
+    }
     
     return (
-        <Form className='formcomponent mx-auto'>
+        <>
+        {(error || userError) && <Message variant='error' message={error||"Passwords do not match"} />}
+        {loading 
+        ? <Loader/>
+        :<Form onSubmit={registerHandler} className='formcomponent mx-auto'>
             <ListGroup className='card p-3'>
                 <ListGroup.Item className='border-0'>
                     <h4 className='d-flex' style={{ alignItems:'center' }}>
@@ -30,7 +72,7 @@ export const RegisterScreen = () => {
                 <ListGroup.Item className='border-0'>
                     <Form.Group>
                         <Form.Label style={{ fontSize:'0.9rem' }}>Name<span style={{ color:'var(--error)' }} className='ml-1'>*</span></Form.Label>
-                        <Form.Control autoFocus={true} required value={name} type="email" onChange={e => setName(e.target.value)} />
+                        <Form.Control autoFocus={true} required value={name} type="text" onChange={e => setName(e.target.value)} />
                     </Form.Group>
                 </ListGroup.Item>
                 <ListGroup.Item className='border-0'>
@@ -76,6 +118,7 @@ export const RegisterScreen = () => {
                     </div>
                 </ListGroup.Item>
             </ListGroup>
-        </Form>
+        </Form>}
+        </>
     )
 }

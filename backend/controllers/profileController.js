@@ -2,12 +2,9 @@ import User from '../models/userModel.js'
 import asyncHandler from 'express-async-handler'
 import { generateToken } from '../utils/generateToken.js'
 
-// route        GET/api/profile/get/:id
-// access       private
-// descripton   Get user profile
 export const userProfile = asyncHandler(async(req,res) => {
-    const { id } = req.params
-    const user = await User.findById(id)
+    const id = req.user._id
+    const user = await User.findById(id).select('-password')
     if(user){
         res.status(200).json({
             message:"User found",
@@ -21,9 +18,6 @@ export const userProfile = asyncHandler(async(req,res) => {
     }
 })
 
-// route        PUT/api/profile/update
-// access       private
-// descripton   Get user profile
 export const userUpdateProfile = asyncHandler(async(req,res) => {
     const { id, name, email } = req.body
     const user = await User.findById(id)

@@ -1,11 +1,12 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import path from 'path'
-import { notFound, errorHandler } from './middlewares/errorMiddleware.js'
-import { connectDB } from './config/db.js'
+import cors from 'cors'
 import authRoutes from './routes/authRoutes.js'
 import profileRoutes from './routes/profileRoutes.js'
-import cors from 'cors'
+import uploadRoutes from './routes/uploadRoutes.js'
+import { notFound, errorHandler } from './middlewares/errorMiddleware.js'
+import { connectDB } from './config/db.js'
 
 connectDB()
 
@@ -29,6 +30,8 @@ app.use(express.json())
 app.use('/api/auth',authRoutes)
 
 app.use('/api/profile',profileRoutes)
+
+app.use('/api/upload',uploadRoutes)
 
 app.get('/',(req,res) => res.sendFile(path.resolve(__dirname, 'backend', 'templates', 'index.html')))
 

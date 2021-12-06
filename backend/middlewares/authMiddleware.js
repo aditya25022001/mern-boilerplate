@@ -2,15 +2,13 @@ import jwt from 'jsonwebtoken'
 import asyncHandler from 'express-async-handler'
 import User from '../models/userModel.js'
 
-// check the token while accessing the authenticated routes
 const authenticate = asyncHandler(async (req,res, next) => {
     let token
-    // check for the bearer token in headers authorisation
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
         try {
             token = req.headers.authorization.split(' ')[1]
             const decoded = jwt.verify(token,process.env.JWT_SECRET)
-            req.user = await User.findById(decoded.id)    
+            req.user = await User.findById(decoded.id)   
         } catch (error) {
             res.status(401).json({ 
                 message:"Token failed, try signing in again."

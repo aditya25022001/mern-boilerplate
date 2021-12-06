@@ -44,6 +44,6 @@
     "nodemailer": "^6.7.1",
     "nodemailer-express-handlebars": "^4.0.0",
     "nodemon": "^2.0.15",
-    "uuid": "^8.3.2"
+    "ulid": "^2.3.0"
   }
 }

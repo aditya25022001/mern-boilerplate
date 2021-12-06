@@ -6,7 +6,7 @@ const apiBaseURL = process.env.REACT_APP_SERVER
 export const userRegisterAction = (name, email, password) => async(dispatch) => {
     try {
         dispatch({
-            tyep:USER_REGISTER_REQUEST
+            type:USER_REGISTER_REQUEST
         })
         const config = {
             headers:{
@@ -18,6 +18,10 @@ export const userRegisterAction = (name, email, password) => async(dispatch) => 
             type:USER_REGISTER_SUCCESS,
             payload: data
         })
+        dispatch({
+            type:USER_LOGIN_SUCCESS,
+            payload:data
+        }) 
         sessionStorage.setItem("userInfo",JSON.stringify(data))
     } catch (error) {
         dispatch({

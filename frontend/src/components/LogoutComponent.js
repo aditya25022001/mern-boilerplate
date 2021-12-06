@@ -1,0 +1,24 @@
+import React from 'react'
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import {IconButton, Tooltip} from '@mui/material';
+import { useDispatch } from 'react-redux'
+import { userLogoutAction } from '../actions/authActions'
+
+export const LogoutComponent = () => {
+    
+    const dispatch = useDispatch()
+    
+    const logoutHandler = () => {
+        dispatch(userLogoutAction())
+    }
+    
+    return (
+        <div style={{ zIndex:'101' }} onClick={logoutHandler}>
+            <IconButton className='border' variant='contained' color="primary" style={{ position:'fixed', bottom:'1rem', right:'1rem' }} >
+                <Tooltip title="Logout" placement="top" arrow>
+                    <PowerSettingsNewIcon style={{ fontSize:'1.8rem' }}/>
+                </Tooltip>
+            </IconButton>
+        </div>
+    )
+}

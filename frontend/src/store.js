@@ -1,13 +1,19 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { userRegisterReducer, userLoginReducer, sendOtpReducer, resetPasswordReducer } from './reducers/authReducers' 
+import { userRegisterReducer, userLoginReducer } from './reducers/authReducers' 
+import { sendOtpReducer, resetPasswordReducer } from './reducers/recoveryReducers'
+import { getProfileReducer } from './reducers/profileReducers'
 
 const reducer = combineReducers({ 
-    userRegister:userRegisterReducer,
-    userLogin:userLoginReducer,
+    
+    userRegister : userRegisterReducer,
+    userLogin : userLoginReducer,
+
     userRequestOtp : sendOtpReducer,
-    userResetPassword : resetPasswordReducer 
+    userResetPassword : resetPasswordReducer,
+    
+    userGetProfile : getProfileReducer
 })
 
 const userInfoFromStorage = sessionStorage.getItem('userInfo') ? JSON.parse(sessionStorage.getItem('userInfo')) : null
