@@ -3,8 +3,10 @@ import dotenv from 'dotenv'
 import path from 'path'
 import cors from 'cors'
 import authRoutes from './routes/authRoutes.js'
+import recoveryRoutes from './routes/recoveryRoutes.js'
 import profileRoutes from './routes/profileRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
+import adminRoutes from './routes/adminRoutes.js'
 import { notFound, errorHandler } from './middlewares/errorMiddleware.js'
 import { connectDB } from './config/db.js'
 
@@ -15,7 +17,7 @@ dotenv.config()
 const app = express()
 
 app.use(cors({
-    origin:"*",
+    origin:process.env.ALLOWED.split(" "),
     methods:["GET","PUT","POST","DELETE"]
 }))
 
@@ -29,9 +31,13 @@ app.use(express.json())
 
 app.use('/api/auth',authRoutes)
 
+app.use('/api/recovery',recoveryRoutes)
+
 app.use('/api/profile',profileRoutes)
 
 app.use('/api/upload',uploadRoutes)
+
+app.use('/api/admin',adminRoutes)
 
 app.get('/',(req,res) => res.sendFile(path.resolve(__dirname, 'backend', 'templates', 'index.html')))
 

@@ -5,7 +5,7 @@ import { getProfileAction, updateProfileAction } from '../actions/profileActions
 import { Form, Image, ListGroup } from 'react-bootstrap'
 import { Loader } from '../components/Loader'
 import { Message } from '../components/Message'
-import { Button, Tooltip } from '@mui/material';
+import { Button, Tooltip, Avatar, Badge } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import moment from 'moment'
 import axios from 'axios'
@@ -92,17 +92,35 @@ export const ProfileScreen = () => {
             {(loading || loadingUpdate) ? <Loader/> : !imageError &&
                 <div>
                     <div className={`mx-auto`} style={{ width:'max-content' }}>
-                        <div>
+                        {profile?.user?.profilePic 
+                        ? <div>
                             <Image roundedCircle className='border-0' src={profile?.user?.profilePic && `./profilePics/${profile?.user?.profilePic}`} style={{ boxShadow:'1px 2px 5px 0px gray', width:"13rem", height:"13rem" }}/>                        
                         </div>
-                        <div>
+                        :<div>
+                            <Badge
+                                overlap="circular"
+                                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                                badgeContent={
+                                    <label>
+                                        <input type="file" onChange={uploadProfileHandler} />
+                                        <Tooltip arrow title="Change Picture" placement="bottom">
+                                            <CameraAltIcon style={{ padding:'0.2rem', cursor:'pointer', color:'#1c60c7', fontSize:'2rem', borderRadius:'50%', backgroundColor:'white', boxShadow:'1px 2px 5px 0px gray' }}/>
+                                        </Tooltip>
+                                    </label>
+                                }
+                            >
+                                <Avatar style={{ width:"13rem", height:"13rem" }}>{profile?.user?.name[0]}</Avatar>
+                            </Badge>
+                        </div>
+                        }
+                        {profile?.user?.profilePic && <div>
                             <label style={{ cursor:'pointer', width:'max-content', marginLeft:'3rem', marginTop:'-1rem' }}>
                                 <input type="file" onChange={uploadProfileHandler} />
                                 <Tooltip arrow title="Change Picture" placement="bottom">
                                     <CameraAltIcon style={{ padding:'0.2rem', cursor:'pointer', color:'#1c60c7', fontSize:'2rem', borderRadius:'50%', backgroundColor:'white', left:'7rem', position:'relative', top:'-2.4rem', boxShadow:'1px 2px 5px 0px gray' }}/>
                                 </Tooltip>
                             </label>
-                        </div>
+                        </div>}
                     </div>
                     <Form onSubmit={updateProfileHandler} className='formcomponent mx-auto'>  
                         <ListGroup>

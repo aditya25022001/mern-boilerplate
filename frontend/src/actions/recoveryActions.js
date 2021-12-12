@@ -13,7 +13,7 @@ export const forgotPasswordAction = (email) => async(dispatch) => {
                 'Content-type':'application/json',
             }
         }
-        const { data } = await axios.post(`${apiBaseURL}/api/auth/sendOTP`,{ email },config)
+        const { data } = await axios.post(`${apiBaseURL}/api/recovery/sendOTP`,{ email },config)
         dispatch({
             type:FORGOT_PASSWORD_SUCCESS,
             payload:data
@@ -36,7 +36,7 @@ export const resetPasswordAction = (password, id) => async(dispatch) => {
                 'Content-type':'application/json',
             }
         }
-        const { data } = await axios.put(`${apiBaseURL}/api/auth/reset`,{ password, id },config)
+        const { data } = await axios.put(`${apiBaseURL}/api/recovery/reset`,{ password, id },config)
         dispatch({
             type:RESET_PASSWORD_SUCCESS,
             payload:data

@@ -13,11 +13,15 @@ input[type="file"]{
 *{
     font-family: myFirstFont;
 }
-.header_link{
+.header_link, .header_link_main{
     color: black;
 }
 .header_link:hover{
     text-decoration: underline;
+    color: black;
+}
+.header_link_main:hover{
+    text-decoration: none;
     color: black;
 }
 .formcomponent{

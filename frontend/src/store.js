@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { userRegisterReducer, userLoginReducer } from './reducers/authReducers' 
 import { sendOtpReducer, resetPasswordReducer } from './reducers/recoveryReducers'
 import { getProfileReducer, updateProfileReducer } from './reducers/profileReducers'
+import { getAllUsersReducer, adminDeleteUserReducer } from './reducers/adminReducers'
 
 const reducer = combineReducers({ 
     
@@ -14,7 +15,10 @@ const reducer = combineReducers({
     userResetPassword : resetPasswordReducer,
     
     userGetProfile : getProfileReducer,
-    userUpdateProfile : updateProfileReducer
+    userUpdateProfile : updateProfileReducer,
+    
+    adminGetUsers : getAllUsersReducer,
+    adminDeleteUser : adminDeleteUserReducer
 })
 
 const userInfoFromStorage = sessionStorage.getItem('userInfo') ? JSON.parse(sessionStorage.getItem('userInfo')) : null

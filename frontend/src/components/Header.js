@@ -2,7 +2,7 @@ import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Avatar , Button, Tooltip } from '@mui/material';
+import { Avatar , Tooltip } from '@mui/material';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 export const Header = () => {
@@ -10,10 +10,13 @@ export const Header = () => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+    const userGetProfile = useSelector(state => state.userGetProfile)
+    const { profile } = userGetProfile
+
     return (
         <Navbar collapseOnSelect className="border-bottom" expand="lg" variant="light">
             <Navbar.Brand>
-                <Link to='/' className='header_link d-flex' style={{ alignItems:'center' }}>
+                <Link to='/' className='header_link_main d-flex' style={{ alignItems:'center' }}>
                     MERN Boilerplate
                 </Link>
             </Navbar.Brand>
@@ -52,17 +55,15 @@ export const Header = () => {
                 {userInfo ? 
                 <Nav className={typeof window!==undefined && window.innerWidth>600 ? '' : 'pt-2'}>
                     <Tooltip arrow title="Profile" placement="bottom">
-                        <Link to='/profile'>
-                            <Avatar style={{ backgroundColor:'black', width:"31px", height:'31px', cursor:'pointer' }} src={`/profilePics/${userInfo?.profilePic}`}>{userInfo.name[0]}</Avatar>
+                        <Link to='/profile' className='header_link'>
+                            <Avatar style={{ backgroundColor:'black', width:"31px", height:'31px', cursor:'pointer' }} src={profile && profile?.user?.profilePic && `/profilePics/${profile?.user?.profilePic}`}>{profile?.user?.name[0]}</Avatar>
                         </Link>
                     </Tooltip>
                 </Nav>
                 :<Nav className={typeof window!==undefined && window.innerWidth>600 ? '' : 'pt-2'}>
-                    <Button variant='contained'>
-                        <Link to='/login' className='header_link' style={{ color:'white' }}>
-                            Login
-                        </Link>
-                    </Button>
+                    <Link to='/login' className='header_link'>
+                        Login
+                    </Link>
                 </Nav>
                 }
             </Navbar.Collapse>
