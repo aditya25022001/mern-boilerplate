@@ -19,17 +19,18 @@ export const userProfile = asyncHandler(async(req,res) => {
 })
 
 export const userUpdateProfile = asyncHandler(async(req,res) => {
-    const { id, name, email } = req.body
+    const { name } = req.body
+    const id = req.user._id
     const user = await User.findById(id)
     if(user){
         user.name = name || user.name
-        user.email = email || user.email
+        user.email = user.email
         user.isAdmin = user.isAdmin
         user.password = user.password
         user.profilePic = user.profilePic
         const updatedUser = await user.save()
         if(updatedUser){
-            res.status(204).json({
+            res.status(200).json({
                 message:"User updated successfully",
                 _id:updatedUser._id,
                 name:updatedUser.name,

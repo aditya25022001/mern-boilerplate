@@ -7,6 +7,9 @@
     --error:#EE6352;
     --success:#649A47;
 }
+input[type="file"]{
+    display: none !important;
+  }
 *{
     font-family: myFirstFont;
 }
@@ -14,8 +17,8 @@
     color: black;
 }
 .header_link:hover{
+    text-decoration: underline;
     color: black;
-    text-decoration: none;
 }
 .formcomponent{
     width:45%;

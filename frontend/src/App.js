@@ -21,7 +21,7 @@ function App() {
     <Router>
       <Header/>
       {userInfo && <LogoutComponent/>}
-      <Container style={{ width:"100%" }} className='mx-auto pt-5 mt-5'>
+      <Container style={{ width:"100%" }} className='mx-auto pt-5 mt-2'>
         <Routes>
           <Route path="/login" element={<LoginScreen/>} exact />
           <Route path="/forgot" element={<ForgotPasswordScreen/>} exact />

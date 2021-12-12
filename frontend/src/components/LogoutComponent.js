@@ -13,8 +13,8 @@ export const LogoutComponent = () => {
     }
     
     return (
-        <div style={{ zIndex:'101' }} onClick={logoutHandler}>
-            <IconButton className='border' variant='contained' color="primary" style={{ position:'fixed', bottom:'1rem', right:'1rem' }} >
+        <div style={{ zIndex:'1001', backgroundColor:'white' }} onClick={logoutHandler}>
+            <IconButton className='border' variant='contained' color="primary" style={{ position:'fixed', bottom:'1rem', right:'1rem', zIndex:'1001', backgroundColor:'white'  }} >
                 <Tooltip title="Logout" placement="top" arrow>
                     <PowerSettingsNewIcon style={{ fontSize:'1.8rem' }}/>
                 </Tooltip>
