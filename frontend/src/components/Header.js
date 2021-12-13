@@ -60,7 +60,7 @@ export const Header = () => {
                         </Link>
                     </Tooltip>
                 </Nav>
-                :<Nav className={typeof window!==undefined && window.innerWidth>600 ? '' : 'pt-2'}>
+                :<Nav className={typeof window!==undefined && window.innerWidth>600 ? 'mr-2' : 'mr-2 pt-2'}>
                     <Link to='/login' className='header_link'>
                         Login
                     </Link>

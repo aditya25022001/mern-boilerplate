@@ -28,3 +28,33 @@ export const deleteUser = asyncHandler(async(req,res) => {
         })
     }
 })
+
+export const editUser = asyncHandler(async(req,res) => {
+    const { id, isAdmin } = req.body
+    const user = await User.findById(id)
+    if(user){
+        user.name = user.name
+        user.email = user.email
+        user.profilePic = user.profilePic
+        user.password = user.password
+        user.isAdmin = isAdmin
+        const updatedUser = await user.save()
+        if(updatedUser){
+            res.status(200).json({
+                message:"User updated successfully",
+                id:updatedUser._id,
+                isAdmin:updatedUser.isAdmin
+            })
+        }
+        else{
+            res.status(500).json({
+                message:"Error updating user"
+            })
+        }
+    }
+    else{
+        res.status(404).json({
+            message:"User not found!"
+        })
+    }
+})
