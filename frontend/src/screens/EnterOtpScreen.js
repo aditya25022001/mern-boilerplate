@@ -33,18 +33,23 @@ export const EnterOtpScreen = () => {
 
     const verifyOTP = (e) => {
         e.preventDefault()
-        if(bcrypt.compare(reqdOTP, otp)){
-            setLoading(true)
-            setTimeout(() => {
-                setSuccess(true)
-            },1500)
-            setTimeout(() => {
-                navigate('/reset')
-            },3000)
-        }
-        else{
-            setError(true)
-        }
+        bcrypt.compare(otp, reqdOTP).then((res) => {
+            if(res){
+                setLoading(true)
+                setTimeout(() => {
+                    setSuccess(true)
+                },1500)
+                setTimeout(() => {
+                    navigate('/reset')
+                },3000)        
+            }
+            else{
+                setError(true)
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
     
     return (
