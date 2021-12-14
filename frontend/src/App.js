@@ -11,6 +11,7 @@ import { EnterOtpScreen } from './screens/EnterOtpScreen'
 import { ResetPasswordScreen } from './screens/ResetPasswordScreen'
 import { ProfileScreen } from './screens/ProfileScreen'
 import { AdminScreen } from './screens/AdminScreen'
+import { APIScreen } from './screens/APIScreen'
 import './App.css';
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
     <Router>
       <Header/>
       {userInfo && <LogoutComponent/>}
-      <Container style={{ width:"100%" }} className='mx-auto pt-5 mt-2'>
+      <Container style={{ width:"100%" }} className='mx-auto pt-3 mt-0 mb-2'>
         <Routes>
           <Route path="/login" element={<LoginScreen/>} exact />
           <Route path="/forgot" element={<ForgotPasswordScreen/>} exact />
@@ -31,6 +32,7 @@ function App() {
           <Route path="/register" element={<RegisterScreen/>} exact />
           <Route path="/profile" element={<ProfileScreen/>} exact />
           <Route path="/admin" element={<AdminScreen/>} exact />
+          <Route path="/api" element={<APIScreen/>} exact />
           <Route path="/" element={<HomeScreen/>} exact />
         </Routes>
       </Container>

@@ -35,7 +35,7 @@ export const ForgotPasswordScreen = () => {
         {success && <Message variant='success' message={`Email has been sent with otp for recovery. If not recieved try checking spam`} />}
         {error && <Message variant="error" message={error} />}
         {loading ? <Loader/>
-        :<Form onSubmit={sendOTPHandler} className='formcomponent mx-auto'>
+        :<Form onSubmit={sendOTPHandler} className='formcomponent mx-auto mt-5'>
             <ListGroup className='card p-3'>
                 <ListGroup.Item className='border-0'>
                     <h4 className='d-flex' style={{ alignItems:'center' }}>

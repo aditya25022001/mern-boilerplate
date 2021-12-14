@@ -38,6 +38,7 @@ export const editUser = asyncHandler(async(req,res) => {
         user.profilePic = user.profilePic
         user.password = user.password
         user.isAdmin = isAdmin
+        user.lastLogin = user.lastLogin
         const updatedUser = await user.save()
         if(updatedUser){
             res.status(200).json({

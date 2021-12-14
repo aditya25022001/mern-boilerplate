@@ -14,6 +14,7 @@ const uploadProfilePic = asyncHandler(async(req,res)=>{
         user.password = user.password
         user.isAdmin = user.isAdmin
         user.profilePic = fileName
+        user.lastLogin = user.lastLogin
         const updatedUser = await user.save()
         if(delFile!=="" && delFile.split(".")[1]!==fileName.split(".")[1] && fs.existsSync(filePath)){
             fs.unlinkSync(filePath)

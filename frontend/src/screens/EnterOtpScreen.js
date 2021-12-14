@@ -53,7 +53,7 @@ export const EnterOtpScreen = () => {
         {success && <Message variant='success' message="Verified!" />}
         {loading 
         ? <Loader/> 
-        : <Form onSubmit={verifyOTP} className='formcomponent mx-auto'>
+        : <Form onSubmit={verifyOTP} className='formcomponent mx-auto mt-5'>
             <ListGroup className='card p-3'>
                 <ListGroup.Item className='border-0'>
                     <h4 className='d-flex' style={{ alignItems:'center' }}>

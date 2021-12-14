@@ -13,7 +13,7 @@ export const register = asyncHandler(async (req,res) => {
     }
     else{
         const user = await User.create({
-            name, email, password
+            name, email, password, lastLogin:Date.now()
         })
         if(user){
             welcomeEmail(name, email)
@@ -22,6 +22,7 @@ export const register = asyncHandler(async (req,res) => {
                 name: user.name,
                 email: user.email,
                 isAdmin: user.isAdmin,
+                lastLogin : user.lastLogin,
                 token:generateToken(user._id)
             })
         }
@@ -38,12 +39,14 @@ export const login = asyncHandler(async (req,res) => {
     const userExists = await User.findOne({ email })
     if(userExists){
         if(await userExists.matchPassword(password)) {
+            await User.findOneAndUpdate({ email:email },{ lastLogin:Date.now() })
             res.status(200).json({
                 _id: userExists._id,
                 name:userExists.name,
                 email:userExists.email,
                 isAdmin:userExists.isAdmin,
                 profilePic:userExists.profilePic,
+                lastLogin : userExists.lastLogin,
                 token: generateToken(userExists._id),
             })
         }

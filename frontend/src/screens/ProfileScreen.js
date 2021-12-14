@@ -90,7 +90,7 @@ export const ProfileScreen = () => {
             {success && <Message variant='success' message="Profile Updated Successfully!" />}
             {(error || imageError || errorUpdate) && <Message variant="error" message={error || errorUpdate || "Invalid file type"} />}
             {(loading || loadingUpdate) ? <Loader/> : !imageError &&
-                <div>
+                <div className='mt-4'>
                     <div className={`mx-auto`} style={{ width:'max-content' }}>
                         {profile?.user?.profilePic 
                         ? <div>

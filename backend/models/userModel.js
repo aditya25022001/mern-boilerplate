@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 
-// schema of user the fields and types
 const userSchema = mongoose.Schema({
     name:{
         type:String,
@@ -20,6 +19,9 @@ const userSchema = mongoose.Schema({
         type:String,
         required:false,
     },
+    lastLogin:{
+        type:Date
+    },
     isAdmin:{
         type:Boolean,
         required:true,
@@ -29,12 +31,10 @@ const userSchema = mongoose.Schema({
     timestamps:true
 })
 
-//used to compare the passwords entered and the one in the database for logging in
 userSchema.methods.matchPassword = async function(enteredPassword){
     return await bcrypt.compare(enteredPassword, this.password)
 }
 
-//save hashed passwords in the database
 userSchema.pre('save', async function(next){
     if(!this.isModified('password')){
         next()

@@ -58,7 +58,7 @@ export const RegisterScreen = () => {
         {(error || userError) && <Message variant='error' message={error||"Passwords do not match"} />}
         {loading 
         ? <Loader/>
-        :<Form onSubmit={registerHandler} className='formcomponent mx-auto'>
+        :<Form onSubmit={registerHandler} className='formcomponent mx-auto mt-5'>
             <ListGroup className='card p-3'>
                 <ListGroup.Item className='border-0'>
                     <h4 className='d-flex' style={{ alignItems:'center' }}>

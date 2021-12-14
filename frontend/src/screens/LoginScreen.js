@@ -40,7 +40,7 @@ export const LoginScreen = () => {
         {error && <Message variant='error' message={error} />}
         {loading 
         ? <Loader/> 
-        : <Form onSubmit={loginHandler} className='formcomponent mx-auto'>
+        : <Form onSubmit={loginHandler} className='formcomponent mx-auto mt-5'>
             <ListGroup className='card p-3'>
                 <ListGroup.Item className='border-0'>
                     <h4 className='d-flex' style={{ alignItems:'center' }}>

@@ -51,7 +51,7 @@ export const deleteUserAction = (id) => async(dispatch, getState) => {
     }
 }
 
-export const updateUserAction = (id,name,email,isAdmin) => async(dispatch, getState) => {
+export const updateUserAction = (id,isAdmin) => async(dispatch, getState) => {
     try {
         dispatch({
             type:ADMIN_UPDATE_USER_REQUEST
@@ -62,7 +62,7 @@ export const updateUserAction = (id,name,email,isAdmin) => async(dispatch, getSt
                 'Authorization':`Bearer ${userInfo.token}`
             }
         }
-        const { data } = await axios.put(`${apiBaseURL}/api/admin/update`,{ id, name, email, isAdmin}, config)
+        const { data } = await axios.put(`${apiBaseURL}/api/admin/update`,{ id, isAdmin}, config)
         dispatch({
             type:ADMIN_UPDATE_USER_SUCCESS,
             payload:data

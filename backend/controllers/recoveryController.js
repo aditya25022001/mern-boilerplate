@@ -30,6 +30,7 @@ export const resetPassword = asyncHandler(async (req,res) => {
         user.password = password
         user.isAdmin = user.isAdmin
         user.profilePic = user.profilePic
+        user.lastLogin = user.lastLogin
         const updatedUser = await user.save()
         res.json({
             _id:updatedUser._id,

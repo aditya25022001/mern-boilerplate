@@ -37,6 +37,7 @@ export const userUpdateProfile = asyncHandler(async(req,res) => {
                 email:updatedUser.email,
                 profilePic:updatedUser.profilePic,
                 isadmin:updatedUser.isadmin,
+                lastLogin:updatedUser.lastLogin,
                 token:generateToken(updatedUser._id)
             })
         }

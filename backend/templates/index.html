@@ -7,68 +7,94 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>MERN Boilerplate APIs Screen</title>
     </head>
-    <body class='p-4'>
-        <h3 class='border-bottom pb-2'>MERN Boilerplate Server</h3>  
-        <p>
-            The following are the endpoints of the api 
-        </p>
-        <table id="table" class='table border table-hover'>
-            <thead class='thead-dark'>
+    <body class='px-4 pt-2'>
+        <div style="font-size:1.1rem;">This is the server of mern boilerplate</div>
+        <div style="font-size:1.1rem;">Author : <a style="color:black; text-decoration:underline;" href="https://adityaudayubale.web.app" target="_blank" rel="noopener">Aditya Uday Ubale</a></div>
+        <div style="font-size:1.1rem;">Repository : <a style="color:black; text-decoration:underline;" href="https://github.com/aditya25022001/mern-boilerplate" target="_blank" rel="noopener">GitHub</a></div>
+        <div class="mb-3" style="font-size:1.1rem;">Below is the api documentation</div>
+        <table id="table" class="table table-dark table-hover">
+            <thead>
                 <tr>
-                    <th>Method</th>
-                    <th>Route</th>
-                    <th>Parameters</th>
-                    <th>Access</th>
-                    <th>Description</th>
+                    <th>
+                        Method
+                    </th>
+                    <th>
+                        Route
+                    </th>
+                    <th>
+                        Parameters
+                    </th>
+                    <th>
+                        Access
+                    </th>
+                    <th>
+                        Description
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr class='table-warning'>
+                <tr>
                     <td>POST</td>
                     <td>/api/auth/register</td>
                     <td>body : JSON{name, email, password}</td>
                     <td>Public</td>
                     <td>A route for user to register</td>
                 </tr>
-                <tr class='table-warning'>
+                <tr>
                     <td>POST</td>
                     <td>/api/auth/login</td>
                     <td>body : JSON{email, password}</td>
                     <td>Public</td>
                     <td>A route for user to login</td>
-                </tr>
-                <tr class='table-success'>
+                </tr><tr>
                     <td>GET</td>
-                    <td>/api/profile/getprofile</td>
+                    <td>/api/profile</td>
                     <td>headers : Authorization : Bearer token</td>
                     <td>Private</td>
-                    <td>A route for user to get user profile</td>
-                </tr>
-                <tr class='table-primary'>
+                    <td>A route for user to get his/her profile</td>
+                </tr><tr>
                     <td>PUT</td>
-                    <td>/api/profile/updateprofile</td>
-                    <td class='pb-0'>
-                        <ul>
-                            <li>headers : Authorization : Bearer token</li>
-                            <li>body : JSON{id, name, email}</li>
-                        </ul>
-                    </td>
+                    <td>/api/profile/update</td>
+                    <td><li>headers : Authorization : Bearer token </li><li> body : JSON{name}</li></td>
                     <td>Private</td>
-                    <td>A route for user to update user profile</td>
-                </tr>
-                <tr class='table-warning'>
-                    <td>POST</td>
-                    <td>/api/auth/sendOTP</td>
+                    <td>A route for user to update his/her profile</td>
+                </tr><tr>
+                    <td>POST
+                    </td>
+                    <td>/api/recovery/sendOTP</td>
                     <td>body : JSON{email}</td>
                     <td>Public</td>
-                    <td>A route for user to request for otp to recover password</td>
-                </tr>
-                <tr class='table-primary'>
+                    <td>A route for user to get OTP for reseting password</td>
+                </tr><tr>
                     <td>PUT</td>
-                    <td>/api/auth/reset/:id</td>
-                    <td>body : JSON{password, id}</td>
+                    <td>/api/recovery/reset</td>
+                    <td>body : JSON{id,password}</td>
                     <td>Public</td>
                     <td>A route for user to reset password</td>
+                </tr><tr>
+                    <td>POST</td>
+                    <td>/api/upload</td>
+                    <td><li>headers : Authorization : Bearer token </li><li> body : Form Data('application',image)</li></td>
+                    <td>Private</td>
+                    <td>A route for user to upload/change profile pic</td>
+                </tr><tr>
+                    <td>GET</td>
+                    <td>/api/admin/users</td>
+                    <td>headers : Authorization : Bearer token</td>
+                    <td>Admin</td>
+                    <td>A route for admin to get all users</td>
+                </tr><tr>
+                    <td>DELETE</td>
+                    <td>/api/admin/delete/:id</td>
+                    <td><li>headers : Authorization : Bearer token </li><li> param : {id}</li></td>
+                    <td>Admin</td>
+                    <td>A route for admin to delete a user</td>
+                </tr><tr>
+                    <td>PUT</td>
+                    <td>/api/admin/update</td>
+                    <td><li>headers : Authorization : Bearer token </li><li> body : JSON{id, isAdmin}</li></td>
+                    <td>Admin</td>
+                    <td>A route for admin to update a user's admin rights</td>
                 </tr>
             </tbody>
         </table>

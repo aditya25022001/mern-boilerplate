@@ -1,17 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Avatar , Tooltip } from '@mui/material';
+import { getProfileAction } from '../actions/profileActions';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 export const Header = () => {
+
+    const dispatch = useDispatch()
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
     const userGetProfile = useSelector(state => state.userGetProfile)
     const { profile } = userGetProfile
+
+    useEffect(() => {
+        dispatch(getProfileAction())
+    },[userInfo, dispatch])
 
     return (
         <Navbar collapseOnSelect className="border-bottom" expand="lg" variant="light">
@@ -41,17 +48,22 @@ export const Header = () => {
                         Features
                     </Link>
                 </Nav>
+                <Nav className={typeof window!==undefined && window.innerWidth>600 ? 'mr-5' : 'border-bottom py-1'}>
+                    <Link className='header_link' to='/api'>
+                        API
+                    </Link>
+                </Nav>
+                <Nav className={typeof window!==undefined && window.innerWidth>600 ? 'mr-5' : 'border-bottom py-1'}>
+                    <a className='header_link' href='https://github.com/aditya25022001/mern-boilerplate' target='_blank' rel='noopener noreferrer'>
+                        Source {"</>"}
+                    </a>
+                </Nav>
                 {userInfo && userInfo?.isAdmin && 
                 <Nav className={typeof window!==undefined && window.innerWidth>600 ? 'mr-5' : 'border-bottom py-1'}>
                     <Link className='header_link' to='/admin'>
                         Admin
                     </Link>
                 </Nav>}
-                <Nav className={typeof window!==undefined && window.innerWidth>600 ? 'mr-5' : 'border-bottom py-1'}>
-                    <a className='header_link' href='https://github.com/aditya25022001/mern-boilerplate' target='_blank' rel='noopener noreferrer'>
-                        Source {"</>"}
-                    </a>
-                </Nav>
                 {userInfo ? 
                 <Nav className={typeof window!==undefined && window.innerWidth>600 ? '' : 'pt-2'}>
                     <Tooltip arrow title="Profile" placement="bottom">

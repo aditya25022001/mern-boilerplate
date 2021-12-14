@@ -79,11 +79,11 @@ export const AdminScreen = () => {
 
     const updateHandler = () => {
         setOpenUpdate(false)
-        dispatch(updateUserAction(id,name,email,isAdmin))
+        dispatch(updateUserAction(id,isAdmin))
     }
 
 
-    const tableHeadings = ["Name","Email","Admin","Joined","Actions"]
+    const tableHeadings = ["Name","Email","Admin","Joined","Last Login","Actions"]
 
     return (
         <div>
@@ -112,6 +112,7 @@ export const AdminScreen = () => {
                         </TableCell>
                         <TableCell align="left">{user.isAdmin ? "Yes" : "No"}</TableCell>
                         <TableCell align="left">{moment(user.createdAt).format("Do MMM YYYY")}</TableCell>
+                        <TableCell align="left">{user.lastLogin ? moment(user.lastLogin).fromNow() : "No activity"}</TableCell>
                         <TableCell align="left" width="15%">
                             <Tooltip title="Delete user" arrow placement="left">
                                 <DeleteIcon onClick={e => deleteModal(user.name, user._id)} style={{ cursor:'pointer', fontSize:'1.2rem', color:'var(--error)' }} className='mr-3'/>
