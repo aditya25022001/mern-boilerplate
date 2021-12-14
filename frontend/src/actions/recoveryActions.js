@@ -1,7 +1,7 @@
 import { FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS,FORGOT_PASSWORD_FAIL,FORGOT_PASSWORD_RESET, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS,RESET_PASSWORD_FAIL,RESET_PASSWORD_RESET } from '../constants/recoveryConstants'
 import axios from 'axios'
 
-const apiBaseURL = process.env.REACT_APP_SERVER
+const apiBaseURL = "https://server-for-mern-boilerplate.herokuapp.com"
 
 export const forgotPasswordAction = (email) => async(dispatch) => {
     try {

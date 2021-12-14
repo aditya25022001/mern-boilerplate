@@ -48,7 +48,7 @@ export const ProfileScreen = () => {
 
     const uploadProfileHandler = async (e) => {
         e.preventDefault()
-        const apiBaseURL = process.env.REACT_APP_SERVER
+        const apiBaseURL = "https://server-for-mern-boilerplate.herokuapp.com"
         const file = e.target.files[0]
         if(['png','jpg','jpeg'].includes(file.name.split('.')[1])){
             const formData = new FormData()

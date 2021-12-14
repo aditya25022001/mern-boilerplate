@@ -1,7 +1,7 @@
 import { USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL, USER_LOGOUT } from '../constants/authConstants'
 import axios from 'axios'
 
-const apiBaseURL = process.env.REACT_APP_SERVER
+const apiBaseURL = "https://server-for-mern-boilerplate.herokuapp.com"
 
 export const userRegisterAction = (name, email, password) => async(dispatch) => {
     try {
