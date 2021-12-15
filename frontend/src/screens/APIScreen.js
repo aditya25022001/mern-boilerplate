@@ -49,8 +49,8 @@ export const APIScreen = () => {
         },
         {
             method:"POST",
-            route:"/api/upload",
-            parameters:"headers : Authorization : Bearer token and body : Form Data('application',image)",
+            route:"/api/profile/upload",
+            parameters:"headers : Authorization : Bearer token and body : JSON{url}",
             access:"Private",
             description:"A route for user to upload/change profile pic"
         },

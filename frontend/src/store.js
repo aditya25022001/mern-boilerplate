@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { userRegisterReducer, userLoginReducer } from './reducers/authReducers' 
 import { sendOtpReducer, resetPasswordReducer } from './reducers/recoveryReducers'
-import { getProfileReducer, updateProfileReducer } from './reducers/profileReducers'
+import { getProfileReducer, updateProfileReducer, uploadProfileReducer } from './reducers/profileReducers'
 import { adminGetAllUsersReducer, adminDeleteUserReducer, adminUpdateUserReducer } from './reducers/adminReducers'
 
 const reducer = combineReducers({ 
@@ -16,6 +16,7 @@ const reducer = combineReducers({
     
     userGetProfile : getProfileReducer,
     userUpdateProfile : updateProfileReducer,
+    userUploadProfile : uploadProfileReducer,
     
     adminGetUsers : adminGetAllUsersReducer,
     adminDeleteUser : adminDeleteUserReducer,

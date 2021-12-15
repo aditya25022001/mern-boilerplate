@@ -48,3 +48,23 @@ export const userUpdateProfile = asyncHandler(async(req,res) => {
         })
     }
 })
+
+export const userUploadProfilePic = asyncHandler(async(req,res) => {
+    const { url } = req.body
+    const user = await User.findById(req.user._id)
+    if(user){
+        const data = await User.findOneAndUpdate({ _id:req.user._id },{ profilePic:url })
+        if(data){
+            res.status(200).json({
+                message:"Uploaded successfully",
+                success:true,
+                user
+            })
+        }
+    }
+    else{
+        res.status(404).json({
+            message:"User not found"
+        })
+    }
+})

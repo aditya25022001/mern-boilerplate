@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getProfileAction, updateProfileAction } from '../actions/profileActions'
+import { getProfileAction, updateProfileAction, uploadProfileAction } from '../actions/profileActions'
 import { Form, Image, ListGroup } from 'react-bootstrap'
 import { Loader } from '../components/Loader'
 import { Message } from '../components/Message'
 import { Button, Tooltip, Avatar, Badge } from '@mui/material';
+import { storage } from '../firebase'
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import moment from 'moment'
 import axios from 'axios'
@@ -49,25 +50,37 @@ export const ProfileScreen = () => {
     const uploadProfileHandler = async (e) => {
         e.preventDefault()
         const apiBaseURL = "https://server-for-mern-boilerplate.herokuapp.com"
-        const file = e.target.files[0]
-        if(['png','jpg','jpeg'].includes(file.name.split('.')[1])){
-            const formData = new FormData()
-            formData.append('application',file)
-            try{
-                const config = {
-                    headers:{
-                        'Content-type':'multipart/form-data',
-                        'Authorization': `Bearer ${userInfo.token}`
-                    }
-                }
-                const { data } = await axios.post(`${apiBaseURL}/api/upload`, formData, config)
-                if(data){
-                    setImageUpload(data.success)
-                }
+        const config = {
+            headers:{
+                'Content-type':'application/json',
+                'Authorization': `Bearer ${userInfo.token}`
             }
-            catch(error){
-                console.log(error)
-            }
+        }
+        if(['png','jpg','jpeg'].includes(e.target.files[0].name.split('.')[1])){
+            const upload = storage.ref(`profile/${profile && profile.user._id}`).put(e.target.files[0])
+            upload.on("state_changed",
+                snapshot=>{},
+                error => {
+                    console.log(error)
+                },
+                () => {
+                    storage.ref("profile").child(profile && profile.user._id).getDownloadURL()
+                    .then(async (url) => {
+                        try{
+                            const { data } = await axios.post(`${apiBaseURL}/api/profile/upload`, { url } , config)
+                            if(data){
+                                setImageUpload(data.success)
+                            }
+                        }
+                        catch(err){
+                            console.log(err);
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                }
+            )
         }
         else{
             setImageError(true)
