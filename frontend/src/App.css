@@ -36,6 +36,18 @@ input[type="file"]{
 .form-control:focus{
     border: 1.2px solid #9c9b9b;
 }
+@media screen and (min-width: 600px) {
+    *::-webkit-scrollbar{
+        width:7px;
+        height:5px;
+        background-color: whitesmoke;
+    }
+    *::-webkit-scrollbar-thumb{
+        width:7px;
+        border-radius:150px;
+        background-color: rgb(211, 211, 211);
+    }
+}
 @media screen and (max-width:1200px){
     .formcomponent{
         width:53%;

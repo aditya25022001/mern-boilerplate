@@ -3,7 +3,7 @@ import { Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Avatar , Tooltip } from '@mui/material';
-import { getProfileAction } from '../actions/profileActions';
+import { getProfileAction } from '../reducers/profileSlices/getProfileSlice';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import Skeleton from '@mui/material/Skeleton';
 
@@ -20,7 +20,9 @@ export const Header = () => {
     const [visible, setVisible] = useState(true)
 
     useEffect(() => {
-        dispatch(getProfileAction())
+        if(userInfo){
+            dispatch(getProfileAction())
+        }
     },[userInfo, dispatch])
 
     return (

@@ -1,37 +1,24 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { userRegisterReducer, userLoginReducer } from './reducers/authReducers' 
-import { sendOtpReducer, resetPasswordReducer } from './reducers/recoveryReducers'
-import { getProfileReducer, updateProfileReducer, uploadProfileReducer } from './reducers/profileReducers'
-import { adminGetAllUsersReducer, adminDeleteUserReducer, adminUpdateUserReducer } from './reducers/adminReducers'
+import { configureStore } from '@reduxjs/toolkit'
+import registerReducer from './reducers/authSlices/registerSlice'
+import loginReducer from './reducers/authSlices/loginSlice'
+import getProfileReducer from './reducers/profileSlices/getProfileSlice'
+import updateProfileReducer from './reducers/profileSlices/updateProfileSlice'
+import uploadProfileReducer from './reducers/profileSlices/uploadProfileSlice'
+import getUsersReducer from './reducers/adminSlices/getAllUsersSlice'
+import deleteUserReducer from './reducers/adminSlices/deleteUserSlice'
+import updateUserReducer from './reducers/adminSlices/updateUserSlice'
 
-const reducer = combineReducers({ 
-    
-    userRegister : userRegisterReducer,
-    userLogin : userLoginReducer,
-
-    userRequestOtp : sendOtpReducer,
-    userResetPassword : resetPasswordReducer,
-    
-    userGetProfile : getProfileReducer,
-    userUpdateProfile : updateProfileReducer,
-    userUploadProfile : uploadProfileReducer,
-    
-    adminGetUsers : adminGetAllUsersReducer,
-    adminDeleteUser : adminDeleteUserReducer,
-    adminUpdateUser : adminUpdateUserReducer
+const store = configureStore({
+    reducer:{
+        userLogin : loginReducer,
+        userRegister : registerReducer,
+        userGetProfile : getProfileReducer,
+        userUpdateProfile : updateProfileReducer,
+        userUploadProfile : uploadProfileReducer,
+        adminGetUsers : getUsersReducer,
+        adminDeleteUser : deleteUserReducer,
+        adminUpdateUser : updateUserReducer
+    }
 })
-
-const userInfoFromStorage = sessionStorage.getItem('userInfo') ? JSON.parse(sessionStorage.getItem('userInfo')) : null
-
-const initialState = {
-    userLogin : { userInfo : userInfoFromStorage },
-    userRegister : { userInfo : userInfoFromStorage }
-}
-
-const middleware = [thunk]
-
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware))) 
 
 export default store

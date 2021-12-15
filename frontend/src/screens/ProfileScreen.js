@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getProfileAction, updateProfileAction, uploadProfileAction } from '../actions/profileActions'
+import { getProfileAction } from '../reducers/profileSlices/getProfileSlice'
+import { updateProfileAction, resetStateUpdate } from '../reducers/profileSlices/updateProfileSlice'
+import { uploadProfileAction, resetStateUpload } from '../reducers/profileSlices/uploadProfileSlice'
 import { Form, Image, ListGroup } from 'react-bootstrap'
 import { Loader } from '../components/Loader'
 import { Message } from '../components/Message'
@@ -19,7 +21,6 @@ export const ProfileScreen = () => {
     const [name, setName] = useState("")
     const [nameCheck, setNameCheck] = useState("")
     const [imageError, setImageError] = useState(false)
-    const [update, setUpdate] = useState(false)
     const [imageUpload, setImageUpload] = useState(false)
     const [visible, setVisible] = useState(true)
 
@@ -33,7 +34,7 @@ export const ProfileScreen = () => {
     const { loading:loadingUpdate, error:errorUpdate, success } = userUpdateProfile
 
     const userUploadProfile = useSelector(state => state.userUploadProfile)
-    const { laoding:loadingUpload, error:errorUpload, success:successUpload } = userUploadProfile
+    const { loading:loadingUpload, error:errorUpload, success:successUpload } = userUploadProfile
 
     useEffect(() => {
         if(!userInfo){
@@ -54,12 +55,18 @@ export const ProfileScreen = () => {
     useEffect(() => {
         if(successUpload){
             dispatch(getProfileAction())
+            setTimeout(() => {
+                dispatch(resetStateUpload())
+            },2500)
         }
     },[successUpload, dispatch])
 
     useEffect(() => {
         if(success){
             dispatch(getProfileAction())
+            setTimeout(() => {
+                dispatch(resetStateUpdate())
+            },2500)
         }
     },[success, dispatch])
 
@@ -77,7 +84,7 @@ export const ProfileScreen = () => {
                 () => {
                     storage.ref("profile").child(profile && profile.user._id).getDownloadURL()
                     .then((url) => {
-                        dispatch(uploadProfileAction(url))
+                        dispatch(uploadProfileAction({url}))
                         setImageUpload(false)
                     })
                     .catch((err) => {
@@ -99,7 +106,7 @@ export const ProfileScreen = () => {
 
     const updateProfileHandler = (e) => {
         e.preventDefault()
-        dispatch(updateProfileAction(name))
+        dispatch(updateProfileAction({name}))
     }
     
     return (
@@ -158,7 +165,6 @@ export const ProfileScreen = () => {
                                     <Form.Label>Name</Form.Label>
                                     <Form.Control value={name} onChange={e => {
                                             setName(e.target.value)
-                                            setUpdate(true)
                                         }
                                     } />
                                 </Form.Group>
@@ -176,7 +182,7 @@ export const ProfileScreen = () => {
                                 </Form.Group>
                             </ListGroup.Item>
                             <ListGroup.Item className='border-0 py-2 pt-3' style={{ zIndex:'200' }}>
-                                <Button variant='contained' disabled={!update || nameCheck===name} type='submit' className='w-100' color='primary'>Update profile</Button>
+                                <Button variant='contained' disabled={nameCheck===name} type='submit' className='w-100' color='primary'>Update profile</Button>
                             </ListGroup.Item>
                         </ListGroup>
                     </Form>

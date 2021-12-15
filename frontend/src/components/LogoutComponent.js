@@ -2,7 +2,7 @@ import React from 'react'
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { IconButton, Tooltip } from '@mui/material';
 import { useDispatch } from 'react-redux'
-import { userLogoutAction } from '../actions/authActions'
+import { userLogoutAction } from '../reducers/authSlices/loginSlice'
 
 export const LogoutComponent = () => {
     

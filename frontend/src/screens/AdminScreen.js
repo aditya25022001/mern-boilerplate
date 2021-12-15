@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Loader } from '../components/Loader'
 import { Message } from '../components/Message'
 import { useNavigate } from 'react-router-dom'
-import { getAllUsersAction, deleteUserAction, updateUserAction } from '../actions/adminActions'
+import { getAllUsersAction } from '../reducers/adminSlices/getAllUsersSlice'
+import { deleteUserAction, resetStateDelete } from '../reducers/adminSlices/deleteUserSlice'
+import { updateUserAction, resetStateUpdate } from '../reducers/adminSlices/updateUserSlice'
 import { Form, Modal, ListGroup } from 'react-bootstrap';
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Checkbox, FormControlLabel } from '@mui/material'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
@@ -48,7 +50,25 @@ export const AdminScreen = () => {
                 dispatch(getAllUsersAction())
             }
         }
-    },[dispatch, userInfo, navigate, success, successUpdate])
+    },[dispatch, userInfo, navigate])
+
+    useEffect(() => {
+        if(userInfo && userInfo.isAdmin && success){
+            dispatch(getAllUsersAction())
+            setTimeout(() => {
+                dispatch(resetStateDelete())
+            },2500)
+        }
+    },[dispatch, userInfo, success])
+
+    useEffect(() => {
+        if(userInfo && userInfo.isAdmin && successUpdate){
+            dispatch(getAllUsersAction())
+            setTimeout(() => {
+                dispatch(resetStateUpdate())
+            },2500)
+        }
+    },[dispatch, userInfo, successUpdate])
 
     const closeModalDelete = () => {
         setOpenDelete(false)
@@ -66,7 +86,7 @@ export const AdminScreen = () => {
 
     const deleteHandler = () => {
         setOpenDelete(false)
-        dispatch(deleteUserAction(id))
+        dispatch(deleteUserAction({id}))
     }
 
     const updateModal = (name, id, email, isAdmin) => {
@@ -79,7 +99,7 @@ export const AdminScreen = () => {
 
     const updateHandler = () => {
         setOpenUpdate(false)
-        dispatch(updateUserAction(id,isAdmin))
+        dispatch(updateUserAction({id,isAdmin}))
     }
 
 
