@@ -87,6 +87,8 @@ export const AdminScreen = () => {
 
     return (
         <div>
+            <div style={{ fontSize:'1.1rem' }} className='mb-4 mt-1'>Admin Portal</div>
+            <div style={{ fontSize:'1.1rem' }} className='mb-2'>Users</div>
             {success && <Message variant="success" message="User deleted successfully!" />}
             {successUpdate && <Message variant="success" message="User updated successfully!" />}
             {(error || errorDelete || errorUpdate) && <Message variant="error" message={error || errorDelete || errorUpdate} />}

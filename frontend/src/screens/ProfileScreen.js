@@ -7,9 +7,9 @@ import { Loader } from '../components/Loader'
 import { Message } from '../components/Message'
 import { Button, Tooltip, Avatar, Badge } from '@mui/material';
 import { storage } from '../firebase'
+import Skeleton from '@mui/material/Skeleton';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import moment from 'moment'
-import axios from 'axios'
 
 export const ProfileScreen = () => {
 
@@ -18,9 +18,10 @@ export const ProfileScreen = () => {
 
     const [name, setName] = useState("")
     const [nameCheck, setNameCheck] = useState("")
-    const [imageUpload, setImageUpload] = useState(false)
     const [imageError, setImageError] = useState(false)
     const [update, setUpdate] = useState(false)
+    const [imageUpload, setImageUpload] = useState(false)
+    const [visible, setVisible] = useState(true)
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -31,6 +32,9 @@ export const ProfileScreen = () => {
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const { loading:loadingUpdate, error:errorUpdate, success } = userUpdateProfile
 
+    const userUploadProfile = useSelector(state => state.userUploadProfile)
+    const { laoding:loadingUpload, error:errorUpload, success:successUpload } = userUploadProfile
+
     useEffect(() => {
         if(!userInfo){
             navigate('/')
@@ -38,7 +42,7 @@ export const ProfileScreen = () => {
         else{
             dispatch(getProfileAction())
         }
-    },[userInfo, navigate, dispatch, imageUpload, success])
+    },[userInfo, navigate, dispatch])
 
     useEffect(() => {
         if(profile && profile?.user){
@@ -47,34 +51,34 @@ export const ProfileScreen = () => {
         }
     },[profile])
 
+    useEffect(() => {
+        if(successUpload){
+            dispatch(getProfileAction())
+        }
+    },[successUpload, dispatch])
+
+    useEffect(() => {
+        if(success){
+            dispatch(getProfileAction())
+        }
+    },[success, dispatch])
+
     const uploadProfileHandler = async (e) => {
         e.preventDefault()
-        const apiBaseURL = "https://server-for-mern-boilerplate.herokuapp.com"
-        const config = {
-            headers:{
-                'Content-type':'application/json',
-                'Authorization': `Bearer ${userInfo.token}`
-            }
-        }
         if(['png','jpg','jpeg'].includes(e.target.files[0].name.split('.')[1])){
             const upload = storage.ref(`profile/${profile && profile.user._id}`).put(e.target.files[0])
             upload.on("state_changed",
-                snapshot=>{},
+                snapshot=>{
+                    setImageUpload(true)
+                },
                 error => {
                     console.log(error)
                 },
                 () => {
                     storage.ref("profile").child(profile && profile.user._id).getDownloadURL()
-                    .then(async (url) => {
-                        try{
-                            const { data } = await axios.post(`${apiBaseURL}/api/profile/upload`, { url } , config)
-                            if(data){
-                                setImageUpload(data.success)
-                            }
-                        }
-                        catch(err){
-                            console.log(err);
-                        }
+                    .then((url) => {
+                        dispatch(uploadProfileAction(url))
+                        setImageUpload(false)
                     })
                     .catch((err) => {
                         console.log(err)
@@ -101,13 +105,19 @@ export const ProfileScreen = () => {
     return (
         <>
             {success && <Message variant='success' message="Profile Updated Successfully!" />}
-            {(error || imageError || errorUpdate) && <Message variant="error" message={error || errorUpdate || "Invalid file type"} />}
-            {(loading || loadingUpdate) ? <Loader/> : !imageError &&
+            {successUpload && <Message variant='success' message="Profile Picture Uploaded Successfully!" />}
+            {(error || imageError || errorUpdate || errorUpload) && <Message variant="error" message={error || errorUpdate || errorUpload  || "Invalid file type"} />}
+            {(loading || loadingUpdate || loadingUpload || imageUpload) ? <Loader/> : !imageError &&
                 <div className='mt-4'>
                     <div className={`mx-auto`} style={{ width:'max-content' }}>
                         {profile?.user?.profilePic 
                         ? <div>
-                            <Image roundedCircle className='border-0' src={profile?.user?.profilePic && `./profilePics/${profile?.user?.profilePic}`} style={{ boxShadow:'1px 2px 5px 0px gray', width:"13rem", height:"13rem" }}/>                        
+                            {visible 
+                            ?<div>
+                                <Skeleton animation="wave" variant="circular" width="13rem" height="13rem" />
+                                <img src={profile?.user?.profilePic && `${profile?.user?.profilePic}`} style={{ display:'none' }} alt="something"  onLoad={e => setVisible(false)} />
+                            </div> 
+                            : <Image roundedCircle className='border-0' src={profile?.user?.profilePic && `${profile?.user?.profilePic}`} style={{ boxShadow:'1px 2px 5px 0px gray', width:"13rem", height:"13rem" }}/>}                        
                         </div>
                         :<div>
                             <Badge

@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Avatar , Tooltip } from '@mui/material';
 import { getProfileAction } from '../actions/profileActions';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import Skeleton from '@mui/material/Skeleton';
 
 export const Header = () => {
 
@@ -15,6 +16,8 @@ export const Header = () => {
 
     const userGetProfile = useSelector(state => state.userGetProfile)
     const { profile } = userGetProfile
+
+    const [visible, setVisible] = useState(true)
 
     useEffect(() => {
         dispatch(getProfileAction())
@@ -68,7 +71,12 @@ export const Header = () => {
                 <Nav className={typeof window!==undefined && window.innerWidth>600 ? '' : 'pt-2'}>
                     <Tooltip arrow title="Profile" placement="bottom">
                         <Link to='/profile' className='header_link'>
-                            <Avatar style={{ backgroundColor:'black', width:"31px", height:'31px', cursor:'pointer' }} src={profile && profile?.user?.profilePic && `/profilePics/${profile?.user?.profilePic}`}>{profile?.user?.name[0]}</Avatar>
+                            {visible 
+                            ? <div>
+                                <Skeleton animation="wave" variant="circular" height="31px" width="31px" />
+                                <img style={{ display:"none" }} src={profile && profile?.user?.profilePic && `${profile?.user?.profilePic}`} alt="something" onLoad={e => setVisible(false)} />
+                            </div> 
+                            :<Avatar style={{ backgroundColor:'black', width:"31px", height:'31px', cursor:'pointer' }} src={profile && profile?.user?.profilePic && `${profile?.user?.profilePic}`}>{profile?.user?.name[0]}</Avatar>}
                         </Link>
                     </Tooltip>
                 </Nav>
