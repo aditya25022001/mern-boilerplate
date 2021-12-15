@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "site": "mernboilerplate",
     "public": "build",
+    "site":"mernboilerplate",
     "ignore": [
       "firebase.json",
       "**/.*",
