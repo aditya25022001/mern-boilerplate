@@ -10,8 +10,7 @@
     "frontend": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run frontend\"",
     "import": "node backend/seeder",
-    "destroy": "node backend/seeder -d",
-    "build":"npm run build --prefix frontend"
+    "destroy": "node backend/seeder -d"
   },
   "repository": {
     "type": "git",
