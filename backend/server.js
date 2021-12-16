@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import path from 'path'
 import cors from 'cors'
+import contactRoutes from './routes/contactRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import recoveryRoutes from './routes/recoveryRoutes.js'
 import profileRoutes from './routes/profileRoutes.js'
@@ -27,6 +28,8 @@ const NODE_ENV = process.env.NODE_ENV || 'development'
 const __dirname = path.resolve()
 
 app.use(express.json())
+
+app.use('/api/contact',contactRoutes)
 
 app.use('/api/auth',authRoutes)
 

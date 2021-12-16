@@ -65,3 +65,17 @@ export const sendLoginWarningEmail = (name, email) => {
     }
     sendMail(mailOptions)
 }
+
+export const sendContactEmail = (name, email, message) => {
+    const mailOptions = {
+        from:EMAIL,
+        to:email,
+        subject:'Contact email',
+        template:'contactEmail',
+        context:{
+            name:name,
+            message:message
+        }
+    }
+    sendMail(mailOptions)
+}
