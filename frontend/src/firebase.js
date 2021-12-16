@@ -8,8 +8,8 @@ const app = firebase.initializeApp({
     projectId: "todoapp-ca23f",
     storageBucket: "todoapp-ca23f.appspot.com",
     messagingSenderId: "429722728213",
-    appId: "1:429722728213:web:bd45c67b4ed9264b929b1c",
-    measurementId: "G-DL0HW8YXX6"
+    appId: "1:429722728213:web:179a90752247cefa929b1c",
+    measurementId: "G-CL1R6MCPQJ"
 })
 
 const storage = app.storage()
