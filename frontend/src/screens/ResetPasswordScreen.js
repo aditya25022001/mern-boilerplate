@@ -8,7 +8,8 @@ import Button from '@mui/material/Button';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import LockIcon from '@mui/icons-material/Lock';
-import { resetPasswordAction } from '../actions/recoveryActions'
+import { resetPasswordAction, resetStatePassword } from '../reducers/recoverySlices/resetPasswordSlice'
+import { resetStateSendOtp } from '../reducers/recoverySlices/sendOtpSlice'
 
 export const ResetPasswordScreen = () => {
 
@@ -41,14 +42,17 @@ export const ResetPasswordScreen = () => {
         if(success){
             setTimeout(() => {
                 navigate('/login')
+                dispatch(resetStateSendOtp())
+                dispatch(resetStatePassword())
             },2000)
         }
-    },[success, navigate])
+    },[success, navigate, dispatch])
 
     const registerHandler = (e) => {
         e.preventDefault()
         if(password===confirmPassword){
-            dispatch(resetPasswordAction(password, otpDetails?._id))
+            let id = otpDetails?._id
+            dispatch(resetPasswordAction({password, id}))
         }
         else{
             setUserError(true)

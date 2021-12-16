@@ -7,6 +7,8 @@ import uploadProfileReducer from './reducers/profileSlices/uploadProfileSlice'
 import getUsersReducer from './reducers/adminSlices/getAllUsersSlice'
 import deleteUserReducer from './reducers/adminSlices/deleteUserSlice'
 import updateUserReducer from './reducers/adminSlices/updateUserSlice'
+import sendOtpReducer from './reducers/recoverySlices/sendOtpSlice'
+import resetPasswordReducer from './reducers/recoverySlices/resetPasswordSlice'
 
 const store = configureStore({
     reducer:{
@@ -15,6 +17,8 @@ const store = configureStore({
         userGetProfile : getProfileReducer,
         userUpdateProfile : updateProfileReducer,
         userUploadProfile : uploadProfileReducer,
+        userRequestOtp : sendOtpReducer,
+        userResetPassword : resetPasswordReducer,
         adminGetUsers : getUsersReducer,
         adminDeleteUser : deleteUserReducer,
         adminUpdateUser : updateUserReducer

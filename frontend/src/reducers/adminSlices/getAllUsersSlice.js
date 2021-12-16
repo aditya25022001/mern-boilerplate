@@ -22,7 +22,7 @@ export const getAllUsersAction = createAsyncThunk(
     }
 )
 
-export const getUsersSlice = createSlice({
+const getUsersSlice = createSlice({
     name:"getUsers",
     initialState:{
         loading:false,

@@ -6,7 +6,7 @@ import { Loader } from '../components/Loader'
 import { Message } from '../components/Message'
 import Button from '@mui/material/Button';
 import LockIcon from '@mui/icons-material/Lock';
-import { forgotPasswordAction } from '../actions/recoveryActions'
+import { forgotPasswordAction } from '../reducers/recoverySlices/sendOtpSlice'
 
 export const ForgotPasswordScreen = () => {
 
@@ -19,7 +19,7 @@ export const ForgotPasswordScreen = () => {
     const [email, setEmail] = useState("")
 
     const sendOTPHandler = (e) => {
-        dispatch(forgotPasswordAction(email))
+        dispatch(forgotPasswordAction({email}))
     }
 
     useEffect(() => {

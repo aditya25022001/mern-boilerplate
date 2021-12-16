@@ -29,7 +29,7 @@ export const resetStateUpdate = createAsyncThunk(
     }
 ) 
 
-export const updateProfileSlice = createSlice({
+const updateProfileSlice = createSlice({
     name:"userUpdateProfile",
     initialState:{
         loading:false,

@@ -29,7 +29,7 @@ export const resetStateUpload = createAsyncThunk(
     }
 ) 
 
-export const uploadProfileSlice = createSlice({
+const uploadProfileSlice = createSlice({
     name:"uploadProfilePic",
     initialState:{
         loading:false,

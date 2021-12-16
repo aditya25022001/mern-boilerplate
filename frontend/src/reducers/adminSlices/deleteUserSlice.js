@@ -29,7 +29,7 @@ export const resetStateDelete = createAsyncThunk(
     }
 )
 
-export const deleteUserSlice = createSlice({
+const deleteUserSlice = createSlice({
     name:"deleteUser",
     initialState:{
         loading:false,

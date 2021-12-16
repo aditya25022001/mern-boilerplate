@@ -24,7 +24,7 @@ export const userRegisterAction = createAsyncThunk(
     }
 )
 
-export const registerSlice = createSlice({
+const registerSlice = createSlice({
     name:"userRegister",
     initialState:{
         loading: false,

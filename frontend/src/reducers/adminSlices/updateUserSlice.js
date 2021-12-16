@@ -29,7 +29,7 @@ export const resetStateUpdate = createAsyncThunk(
     }
 )
 
-export const updateUserSlice = createSlice({
+const updateUserSlice = createSlice({
     name:"updateUser",
     initialState:{
         loading:false,
