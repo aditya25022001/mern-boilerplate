@@ -12,6 +12,7 @@ import { ResetPasswordScreen } from './screens/ResetPasswordScreen'
 import { ProfileScreen } from './screens/ProfileScreen'
 import { AdminScreen } from './screens/AdminScreen'
 import { APIScreen } from './screens/APIScreen'
+import { ContactScreen } from './screens/ContactScreen'
 import './App.css';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/profile" element={<ProfileScreen/>} exact />
           <Route path="/admin" element={<AdminScreen/>} exact />
           <Route path="/api" element={<APIScreen/>} exact />
+          <Route path="/contact" element={<ContactScreen/>} exact />
           <Route path="/" element={<HomeScreen/>} exact />
         </Routes>
       </Container>

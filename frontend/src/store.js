@@ -1,12 +1,15 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { makeContactReducer } from './reducers/contactReducers'
 import { userRegisterReducer, userLoginReducer } from './reducers/authReducers' 
 import { sendOtpReducer, resetPasswordReducer } from './reducers/recoveryReducers'
 import { getProfileReducer, updateProfileReducer, uploadProfileReducer } from './reducers/profileReducers'
 import { adminGetAllUsersReducer, adminDeleteUserReducer, adminUpdateUserReducer } from './reducers/adminReducers'
 
 const reducer = combineReducers({ 
+
+    userMakeContact : makeContactReducer,
     
     userRegister : userRegisterReducer,
     userLogin : userLoginReducer,
