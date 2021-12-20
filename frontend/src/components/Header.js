@@ -38,39 +38,49 @@ export const Header = () => {
                 </span>
             </Navbar.Toggle>
             <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className={typeof window!==undefined && window.innerWidth>600 ? 'ml-auto mr-5' : 'ml-auto border-bottom py-1'}>
+                <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'ml-auto mr-5' : 'ml-auto border-bottom py-1'}>
+                    <Link className='header_link' to='/'>
+                        Home
+                    </Link>
+                </Nav>
+                <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
                     <Link className='header_link' to='/about'>
                         About
                     </Link>
                 </Nav>
-                <Nav className={typeof window!==undefined && window.innerWidth>600 ? 'mr-5' : 'border-bottom py-1'}>
+                <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
                     <Link className='header_link' to='/docs'>
                         Docs
                     </Link>
                 </Nav>
-                <Nav className={typeof window!==undefined && window.innerWidth>600 ? 'mr-5' : 'border-bottom py-1'}>
+                <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
                     <Link className='header_link' to='/features'>
                         Features
                     </Link>
                 </Nav>
-                <Nav className={typeof window!==undefined && window.innerWidth>600 ? 'mr-5' : 'border-bottom py-1'}>
+                <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
                     <Link className='header_link' to='/api'>
                         API
                     </Link>
                 </Nav>
-                <Nav className={typeof window!==undefined && window.innerWidth>600 ? 'mr-5' : 'border-bottom py-1'}>
+                <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
                     <a className='header_link' href='https://github.com/aditya25022001/mern-boilerplate' target='_blank' rel='noopener noreferrer'>
                         Source {"</>"}
                     </a>
                 </Nav>
+                <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
+                    <Link className='header_link' to='/contact'>
+                        Contact
+                    </Link>
+                </Nav>
                 {userInfo && userInfo?.isAdmin && 
-                <Nav className={typeof window!==undefined && window.innerWidth>600 ? 'mr-5' : 'border-bottom py-1'}>
+                <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
                     <Link className='header_link' to='/admin'>
                         Admin
                     </Link>
                 </Nav>}
                 {userInfo ? 
-                <Nav className={typeof window!==undefined && window.innerWidth>600 ? '' : 'pt-2'}>
+                <Nav className={typeof window!==undefined && window.innerWidth>992 ? '' : 'pt-2'}>
                     <Tooltip arrow title="Profile" placement="bottom">
                         <Link to='/profile' className='header_link'>
                             {visible 
@@ -82,7 +92,7 @@ export const Header = () => {
                         </Link>
                     </Tooltip>
                 </Nav>
-                :<Nav className={typeof window!==undefined && window.innerWidth>600 ? 'mr-2' : 'mr-2 pt-2'}>
+                :<Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-2' : 'mr-2 pt-2'}>
                     <Link to='/login' className='header_link'>
                         Login
                     </Link>

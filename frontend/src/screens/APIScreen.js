@@ -75,12 +75,19 @@ export const APIScreen = () => {
             access:"Admin",
             description:"A route for admin to update a user's admin rights"
         },
+        {
+            method:"POST",
+            route:"/api/contact",
+            parameters:"body : JSON{name, email, message}",
+            access:"Public",
+            description:"A route for user to make contact with the admin or project team"
+        },
     ]
     
     return (
         <>
             <div style={{ fontSize:'1.1rem' }} className='mb-3'>API Endpoints and description</div>
-            <TableContainer className='border border-bottom-0 table-responsive rounded table-hover'>
+            <TableContainer className='border mb-4 border-bottom-0 table-responsive rounded table-hover'>
                 <Table aria-label="a dense table" sx={{ minWidth: 750 }}>
                     <TableHead stickyHeader>
                     <TableRow>

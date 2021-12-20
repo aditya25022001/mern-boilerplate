@@ -9,6 +9,7 @@ import deleteUserReducer from './reducers/adminSlices/deleteUserSlice'
 import updateUserReducer from './reducers/adminSlices/updateUserSlice'
 import sendOtpReducer from './reducers/recoverySlices/sendOtpSlice'
 import resetPasswordReducer from './reducers/recoverySlices/resetPasswordSlice'
+import contactReducer from './reducers/contactSlices/contactSlice'
 
 const store = configureStore({
     reducer:{
@@ -21,7 +22,8 @@ const store = configureStore({
         userResetPassword : resetPasswordReducer,
         adminGetUsers : getUsersReducer,
         adminDeleteUser : deleteUserReducer,
-        adminUpdateUser : updateUserReducer
+        adminUpdateUser : updateUserReducer,
+        userMakeContact : contactReducer,
     }
 })
 

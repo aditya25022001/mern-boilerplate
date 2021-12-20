@@ -46,55 +46,70 @@
                     <td>body : JSON{email, password}</td>
                     <td>Public</td>
                     <td>A route for user to login</td>
-                </tr><tr>
+                </tr>
+                <tr>
                     <td>GET</td>
                     <td>/api/profile</td>
                     <td>headers : Authorization : Bearer token</td>
                     <td>Private</td>
                     <td>A route for user to get his/her profile</td>
-                </tr><tr>
+                </tr>
+                <tr>
                     <td>PUT</td>
                     <td>/api/profile/update</td>
                     <td><li>headers : Authorization : Bearer token </li><li> body : JSON{name}</li></td>
                     <td>Private</td>
                     <td>A route for user to update his/her profile</td>
-                </tr><tr>
+                </tr>
+                <tr>
                     <td>POST
                     </td>
                     <td>/api/recovery/sendOTP</td>
                     <td>body : JSON{email}</td>
                     <td>Public</td>
                     <td>A route for user to get OTP for reseting password</td>
-                </tr><tr>
+                </tr>
+                <tr>
                     <td>PUT</td>
                     <td>/api/recovery/reset</td>
                     <td>body : JSON{id,password}</td>
                     <td>Public</td>
                     <td>A route for user to reset password</td>
-                </tr><tr>
+                </tr>
+                <tr>
                     <td>POST</td>
                     <td>/api/profile/upload</td>
                     <td><li>headers : Authorization : Bearer token </li><li> body : JSON{url}</li></td>
                     <td>Private</td>
                     <td>A route for user to upload/change profile pic</td>
-                </tr><tr>
+                </tr>
+                <tr>
                     <td>GET</td>
                     <td>/api/admin/users</td>
                     <td>headers : Authorization : Bearer token</td>
                     <td>Admin</td>
                     <td>A route for admin to get all users</td>
-                </tr><tr>
+                </tr>
+                <tr>
                     <td>DELETE</td>
                     <td>/api/admin/delete/:id</td>
                     <td><li>headers : Authorization : Bearer token </li><li> param : {id}</li></td>
                     <td>Admin</td>
                     <td>A route for admin to delete a user</td>
-                </tr><tr>
+                </tr>
+                <tr>
                     <td>PUT</td>
                     <td>/api/admin/update</td>
                     <td><li>headers : Authorization : Bearer token </li><li> body : JSON{id, isAdmin}</li></td>
                     <td>Admin</td>
                     <td>A route for admin to update a user's admin rights</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/api/contact</td>
+                    <td>body : JSON{name, email, message}</td>
+                    <td>Public</td>
+                    <td>A route for user to make contact with the admin or project team</td>
                 </tr>
             </tbody>
         </table>
