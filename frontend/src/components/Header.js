@@ -44,11 +44,6 @@ export const Header = () => {
                     </Link>
                 </Nav>
                 <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
-                    <Link className='header_link' to='/about'>
-                        About
-                    </Link>
-                </Nav>
-                <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
                     <Link className='header_link' to='/docs'>
                         Docs
                     </Link>
@@ -68,6 +63,11 @@ export const Header = () => {
                         Source {"</>"}
                     </a>
                 </Nav>
+                {userInfo && <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
+                    <Link className='header_link' to='/generate'>
+                        Generate
+                    </Link>
+                </Nav>}
                 <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
                     <Link className='header_link' to='/contact'>
                         Contact

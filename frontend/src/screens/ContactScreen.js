@@ -66,7 +66,7 @@ export const ContactScreen = () => {
                   <ListGroup.Item className='border-0'>
                       <Form.Group>
                           <Form.Label>Message<span className='ml-1' style={{ color:'var(--error)' }}>*</span></Form.Label>
-                          <Form.Control required as="textarea" rows={6} value={message} onChange={e => setMessage(e.target.value)} />
+                          <Form.Control autoFocus={true} required as="textarea" rows={6} value={message} onChange={e => setMessage(e.target.value)} />
                       </Form.Group>
                   </ListGroup.Item>
                   <ListGroup.Item className='border-0'>

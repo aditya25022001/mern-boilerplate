@@ -99,15 +99,15 @@ export const APIScreen = () => {
                     <TableBody>
                     {endpoints.map((endpoint,index) => (
                         <TableRow key={index}>
-                        <TableCell align="left">{endpoint.method}</TableCell>
-                        <TableCell align="left">{"{serverURL}"+endpoint.route}</TableCell>
-                        <TableCell align="left">
-                            {endpoint.parameters.includes("and") ? endpoint.parameters.split("and").map((each, index) => (
-                                <li key={index}>{each}</li>
-                            )) : endpoint.parameters}
-                        </TableCell>
-                        <TableCell align="left">{endpoint.access}</TableCell>
-                        <TableCell align="left">{endpoint.description}</TableCell>
+                            <TableCell align="left">{endpoint.method}</TableCell>
+                            <TableCell align="left">{"{serverURL}"+endpoint.route}</TableCell>
+                            <TableCell align="left">
+                                {endpoint.parameters.includes("and") ? endpoint.parameters.split("and").map((each, index) => (
+                                    <li key={index}>{each}</li>
+                                )) : endpoint.parameters}
+                            </TableCell>
+                            <TableCell align="left">{endpoint.access}</TableCell>
+                            <TableCell align="left">{endpoint.description}</TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
