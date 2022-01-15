@@ -61,7 +61,7 @@ export const deleteApi = asyncHandler(async(req,res) => {
     const api = await API.findById(id)
     if(api){
         await api.remove()
-        res.status(204).json({ message:"API deleted successfully" })
+        res.status(200).json({ message:"API deleted successfully" })
     } 
     else{
         res.status(404).json({
