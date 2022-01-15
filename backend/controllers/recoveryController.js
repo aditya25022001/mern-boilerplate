@@ -1,6 +1,6 @@
 import User from '../models/userModel.js'
 import asyncHandler from 'express-async-handler'
-import {  sendOtpEmail } from './emailController.js'
+import { sendOtpEmail } from './emailController.js'
 import { generateHash } from '../utils/generateHash.js'
 import { ulid } from 'ulid'
 

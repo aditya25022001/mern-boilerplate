@@ -7,6 +7,7 @@ import authRoutes from './routes/authRoutes.js'
 import recoveryRoutes from './routes/recoveryRoutes.js'
 import profileRoutes from './routes/profileRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
+import apiRoutes from './routes/apiRoutes.js'
 import { notFound, errorHandler } from './middlewares/errorMiddleware.js'
 import { connectDB } from './config/db.js'
 
@@ -38,6 +39,8 @@ app.use('/api/recovery',recoveryRoutes)
 app.use('/api/profile',profileRoutes)
 
 app.use('/api/admin',adminRoutes)
+
+app.use('/api/api',apiRoutes)
 
 app.get('/',(req,res) => res.sendFile(path.resolve(__dirname, 'backend', 'templates', 'index.html')))
 
