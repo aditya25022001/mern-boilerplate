@@ -8,8 +8,8 @@ router.route('/get').get(getApiEndpoints)
 
 router.route('/add').post(authenticate,admin,addApi)
 
-router.route('/edit').post(authenticate,admin,editApi)
+router.route('/edit').put(authenticate,admin,editApi)
 
-router.route('/delete/:id').post(authenticate,admin,deleteApi)
+router.route('/delete/:id').delete(authenticate,admin,deleteApi)
 
 export default router
