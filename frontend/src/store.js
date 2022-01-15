@@ -6,6 +6,7 @@ import { userRegisterReducer, userLoginReducer } from './reducers/authReducers'
 import { sendOtpReducer, resetPasswordReducer } from './reducers/recoveryReducers'
 import { getProfileReducer, updateProfileReducer, uploadProfileReducer } from './reducers/profileReducers'
 import { adminGetAllUsersReducer, adminDeleteUserReducer, adminUpdateUserReducer } from './reducers/adminReducers'
+import { getApiEndpointsReducer } from './reducers/apiReducers'
 
 const reducer = combineReducers({ 
 
@@ -23,7 +24,9 @@ const reducer = combineReducers({
     
     adminGetUsers : adminGetAllUsersReducer,
     adminDeleteUser : adminDeleteUserReducer,
-    adminUpdateUser : adminUpdateUserReducer
+    adminUpdateUser : adminUpdateUserReducer,
+
+    userGetApiEndpoints : getApiEndpointsReducer
 })
 
 const userInfoFromStorage = sessionStorage.getItem('userInfo') ? JSON.parse(sessionStorage.getItem('userInfo')) : null

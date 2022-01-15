@@ -76,4 +76,32 @@ export const endpoints = [
         access:"Public",
         description:"A route for user to make contact with the admin or project team"
     },
+    {
+        method:"GET",
+        route:"/api/api/get",
+        parameters:"none",
+        access:"Public",
+        description:"A route to get all api endpoints"
+    },
+    {
+        method:"POST",
+        route:"/api/api/add",
+        parameters:"headers : Authorization : Bearer token and body : JSON{method, route, parameters, access, description}",
+        access:"Admin",
+        description:"A route for admin to add a api endpoint"
+    },
+    {
+        method:"PUT",
+        route:"/api/api/edit",
+        parameters:"headers : Authorization : Bearer token and body : JSON{method, route, parameters, access, description}",
+        access:"Admin",
+        description:"A route for admin to edit an api endpoint"
+    },
+    {
+        method:"DELETE",
+        route:"/api/api/delete/:id",
+        parameters:"headers : Authorization : Bearer token and params : { id }",
+        access:"Admin",
+        description:"A route for admin to delete a certain endpoint"
+    },
 ]

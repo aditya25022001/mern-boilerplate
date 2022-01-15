@@ -21,7 +21,7 @@ export const Header = () => {
 
     useEffect(() => {
         dispatch(getProfileAction())
-    },[userInfo, dispatch])
+    },[dispatch])
 
     return (
         <Navbar collapseOnSelect className="border-bottom" expand="lg" variant="light">
@@ -39,11 +39,6 @@ export const Header = () => {
                 <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'ml-auto mr-5' : 'ml-auto border-bottom py-1'}>
                     <Link className='header_link' to='/'>
                         Home
-                    </Link>
-                </Nav>
-                <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
-                    <Link className='header_link' to='/about'>
-                        About
                     </Link>
                 </Nav>
                 <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
@@ -66,6 +61,11 @@ export const Header = () => {
                         Source {"</>"}
                     </a>
                 </Nav>
+                {userInfo && <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
+                    <Link className='header_link' to='/generate'>
+                        Generate
+                    </Link>
+                </Nav>}
                 <Nav className={typeof window!==undefined && window.innerWidth>992 ? 'mr-5' : 'border-bottom py-1'}>
                     <Link className='header_link' to='/contact'>
                         Contact
