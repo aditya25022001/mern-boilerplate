@@ -6,7 +6,7 @@ import { userRegisterReducer, userLoginReducer } from './reducers/authReducers'
 import { sendOtpReducer, resetPasswordReducer } from './reducers/recoveryReducers'
 import { getProfileReducer, updateProfileReducer, uploadProfileReducer } from './reducers/profileReducers'
 import { adminGetAllUsersReducer, adminDeleteUserReducer, adminUpdateUserReducer } from './reducers/adminReducers'
-import { getApiEndpointsReducer } from './reducers/apiReducers'
+import { getApiEndpointsReducer, addApiReducer, editApiReducer, deleteApiReducer } from './reducers/apiReducers'
 
 const reducer = combineReducers({ 
 
@@ -21,12 +21,16 @@ const reducer = combineReducers({
     userGetProfile : getProfileReducer,
     userUpdateProfile : updateProfileReducer,
     userUploadProfile : uploadProfileReducer,
-    
+
+    userGetApiEndpoints : getApiEndpointsReducer,
+    adminAddApi : addApiReducer,
+    adminEditApi : editApiReducer,
+    adminDeleteApi : deleteApiReducer,
+
     adminGetUsers : adminGetAllUsersReducer,
     adminDeleteUser : adminDeleteUserReducer,
     adminUpdateUser : adminUpdateUserReducer,
 
-    userGetApiEndpoints : getApiEndpointsReducer
 })
 
 const userInfoFromStorage = sessionStorage.getItem('userInfo') ? JSON.parse(sessionStorage.getItem('userInfo')) : null

@@ -20,3 +20,77 @@ export const getApiEndpointsAction = () => async(dispatch) => {
         })        
     }
 }
+
+export const addApiAction = (method,route,parameters,access,description) => async(dispatch,getState) => {
+    try {
+        dispatch({
+            type:ADD_API_ENDPOINT_REQUEST
+        })
+        const { userLogin : { userInfo } } = getState()
+        const config = {
+            headers:{
+                'Content-Type': 'application/json',
+                Authorization:`Bearer ${userInfo.token}`
+            }
+        }
+        const { data } = await axios.post(`${apiBaseURL}/api/api/add`,{ method,route,parameters,access,description },config)
+        dispatch({
+            type:ADD_API_ENDPOINT_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:ADD_API_ENDPOINT_FAIL,
+            payload:error.response && error.response.data.message ? error.response.data.message : error.message
+        })        
+    }
+}
+
+export const editApiAction = (method,route,parameters,access,description) => async(dispatch,getState) => {
+    try {
+        dispatch({
+            type:EDIT_API_ENDPOINT_REQUEST
+        })
+        const { userLogin : { userInfo } } = getState()
+        const config = {
+            headers:{
+                'Content-Type': 'application/json',
+                Authorization:`Bearer ${userInfo.token}`
+            }
+        }
+        const { data } = await axios.put(`${apiBaseURL}/api/api/edit`,{ method,route,parameters,access,description },config)
+        dispatch({
+            type:EDIT_API_ENDPOINT_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:EDIT_API_ENDPOINT_FAIL,
+            payload:error.response && error.response.data.message ? error.response.data.message : error.message
+        })        
+    }
+}
+
+export const deleteApiAction = (id) => async(dispatch,getState) => {
+    try {
+        dispatch({
+            type:DELETE_API_ENDPOINT_REQUEST
+        })
+        const { userLogin : { userInfo } } = getState()
+        const config = {
+            headers:{
+                Authorization:`Bearer ${userInfo.token}`
+            }
+        }
+        const { data } = await axios.delete(`${apiBaseURL}/api/api/delete/${id}`,config)
+        dispatch({
+            type:DELETE_API_ENDPOINT_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:DELETE_API_ENDPOINT_FAIL,
+            payload:error.response && error.response.data.message ? error.response.data.message : error.message
+        })        
+    }
+}

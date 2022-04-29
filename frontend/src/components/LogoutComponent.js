@@ -9,16 +9,18 @@ export const LogoutComponent = () => {
     const dispatch = useDispatch()
     
     const logoutHandler = () => {
-        dispatch(userLogoutAction())
+        setTimeout(() => {
+            dispatch(userLogoutAction())
+        },2500)
     }
     
     return (
         <div style={{ zIndex:'1001', backgroundColor:'white' }} onClick={logoutHandler}>
-            <IconButton className='border' variant='contained' color="primary" style={{ position:'fixed', bottom:'1rem', right:'1rem', zIndex:'1001', backgroundColor:'white'  }} >
-                <Tooltip title="Logout" placement="top" arrow>
+            <Tooltip title="Logout" placement="top" arrow>
+                <IconButton className='border' variant='contained' color="primary" style={{ position:'fixed', bottom:'1rem', right:'1rem', zIndex:'1001', backgroundColor:'white'  }} >
                     <PowerSettingsNewIcon style={{ fontSize:'1.8rem' }}/>
-                </Tooltip>
-            </IconButton>
+                </IconButton>
+            </Tooltip>
         </div>
     )
 }

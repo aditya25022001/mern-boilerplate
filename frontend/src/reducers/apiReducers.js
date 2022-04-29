@@ -20,3 +20,66 @@ export const getApiEndpointsReducer = (state={endpoints:[]},action) => {
             return state
     }
 }
+
+export const addApiReducer = (state={},action) => {
+    switch(action.type){
+        case ADD_API_ENDPOINT_REQUEST:
+            return{
+                loading:true
+            }
+        case ADD_API_ENDPOINT_SUCCESS:
+            return{
+                loading:false,
+                success:true
+            }
+        case ADD_API_ENDPOINT_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }
+        default:
+            return state
+    }
+}
+
+export const editApiReducer = (state={},action) => {
+    switch(action.type){
+        case EDIT_API_ENDPOINT_REQUEST:
+            return{
+                loading:true
+            }
+        case EDIT_API_ENDPOINT_SUCCESS:
+            return{
+                loading:false,
+                success:true
+            }
+        case EDIT_API_ENDPOINT_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }
+        default:
+            return state
+    }
+}
+
+export const deleteApiReducer = (state={},action) => {
+    switch(action.type){
+        case DELETE_API_ENDPOINT_REQUEST:
+            return{
+                loading:true
+            }
+        case DELETE_API_ENDPOINT_SUCCESS:
+            return{
+                loading:false,
+                success:true
+            }
+        case DELETE_API_ENDPOINT_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }
+        default:
+            return state
+    }
+}
