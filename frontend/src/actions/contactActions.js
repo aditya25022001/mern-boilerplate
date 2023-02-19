@@ -1,7 +1,7 @@
 import { MAKE_CONTACT_REQUEST, MAKE_CONTACT_SUCCESS, MAKE_CONTACT_FAIL  } from '../constants/contactConstants'
 import axios from 'axios'
 
-const apiBaseURL = "https://server-for-mern-boilerplate.herokuapp.com"
+const apiBaseURL = "https://server-for-mern-boilerplate.onrender.com"
 
 export const makeContactAction = (name, email, message) => async(dispatch) => {
     try {

@@ -1,7 +1,7 @@
 import { GET_API_ENDPOINTS_REQUEST, GET_API_ENDPOINTS_SUCCESS, GET_API_ENDPOINTS_FAIL, ADD_API_ENDPOINT_REQUEST, ADD_API_ENDPOINT_SUCCESS, ADD_API_ENDPOINT_FAIL, EDIT_API_ENDPOINT_REQUEST, EDIT_API_ENDPOINT_SUCCESS, EDIT_API_ENDPOINT_FAIL, DELETE_API_ENDPOINT_REQUEST, DELETE_API_ENDPOINT_SUCCESS, DELETE_API_ENDPOINT_FAIL } from '../constants/apiConstants'
 import axios from 'axios'
 
-const apiBaseURL = "https://server-for-mern-boilerplate.herokuapp.com"
+const apiBaseURL = "https://server-for-mern-boilerplate.onrender.com"
 
 export const getApiEndpointsAction = () => async(dispatch) => {
     try {

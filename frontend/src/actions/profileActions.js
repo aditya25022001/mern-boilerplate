@@ -1,7 +1,7 @@
 import { USER_GET_PROFILE_REQUEST, USER_GET_PROFILE_SUCCESS, USER_GET_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_RESET, USER_UPLOAD_PROFILE_REQUEST, USER_UPLOAD_PROFILE_SUCCESS, USER_UPLOAD_PROFILE_FAIL, USER_UPLOAD_PROFILE_RESET } from '../constants/profileConstants'
 import axios from 'axios'
 
-const apiBaseURL = "https://server-for-mern-boilerplate.herokuapp.com"
+const apiBaseURL = "https://server-for-mern-boilerplate.onrender.com"
 
 export const getProfileAction = () => async(dispatch, getState) => {
     try {
