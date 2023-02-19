@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const apiBaseURL = "https://server-for-mern-boilerplate.herokuapp.com"
+const apiBaseURL = "https://server-for-mern-boilerplate.onrender.com"
 
 export const getAllUsersAction = createAsyncThunk(
     "admin/getUsers",

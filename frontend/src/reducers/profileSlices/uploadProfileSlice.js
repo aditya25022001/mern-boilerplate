@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const apiBaseURL = "https://server-for-mern-boilerplate.herokuapp.com"
+const apiBaseURL = "https://server-for-mern-boilerplate.onrender.com"
 
 export const uploadProfileAction = createAsyncThunk(
     "user/uploadProfilePic",
