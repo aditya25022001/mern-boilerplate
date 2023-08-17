@@ -11,7 +11,9 @@
     "dev": "concurrently \"npm run server\" \"npm run frontend\"",
     "import": "node backend/seeder",
     "api": "node backend/seeder -api",
-    "destroy": "node backend/seeder -d"
+    "destroy": "node backend/seeder -d",
+    "if": "npm i --prefix frontend",
+    "ib": "npm i"
   },
   "repository": {
     "type": "git",
